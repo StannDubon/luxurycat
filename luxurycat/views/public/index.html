@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <link rel="stylesheet" href="../../resources/css/card.css">
+  <link rel="stylesheet" href="../../resources/css/fonts.css" />
+  <link rel="stylesheet" href="../../resources/css/public-sidebar.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+</head>
+
+<body>
+
+  <!--Header prueba-->
+
+  <div class="menu">
+    <ion-icon name="menu-outline"></ion-icon>
+    <ion-icon name="close-outline"></ion-icon>
+  </div>
+
+  <div class="barra-lateral">
+    <div>
+      <div class="nombre-pagina">
+        <img src="../../resources/svg/logo.svg" alt="" id="cloud" name="cloud-outline" />
+        <span>LuxuryCat</span>
+      </div>
+    </div>
+
+    <nav class="navegacion">
+      <ul class="ul-fixed">
+        <li>
+          <a href="dashboard.html" id="sidebar-cat-dashboard">
+            <ion-icon name="grid-outline"></ion-icon>
+            <span>Dashboard</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div>
+      <div class="linea"></div>
+
+      <div class="modo-oscuro">
+        <div class="info">
+          <ion-icon name="moon-outline"></ion-icon>
+          <span>Dark Mode</span>
+        </div>
+        <div class="switch">
+          <div class="base">
+            <div class="circulo"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="usuario">
+        <a href="index.html">
+          <img
+            src="https://c4.wallpaperflare.com/wallpaper/950/884/848/anime-girls-icons-profile-hd-wallpaper-preview.jpg"
+            alt="Descripción de la imagen">
+        </a>
+        <div class="info-usuario">
+          <div class="nombre-email">
+            <span class="nombre">Stann</span>
+            <span class="email">stalin.dbn@gmail.com</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <div class="welcome-text">
+      <p class="louis-george-bold fs-3 fs-sm-4">Selecciona alguna de nuestras categorias</p>
+    </div>
+
+    <div class="custom-card-gucci-container">
+
+      <a href="" class="text-decoration-none custom-gucci-card">
+        <div class="custom-card-main">
+          <img src="../../resources/img/image1.png" class="z-n1 position-absolute">
+
+          <div class="z-0 card_hover_test">
+            <span class="animated-text">Comida</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="" class="text-decoration-none custom-gucci-card">
+        <div class="custom-card-main">
+          <img src="../../resources/img/image2.png" class="z-n1 position-absolute">
+
+          <div class="z-n1 card_hover_test">
+            <span class="animated-text">Utilidades</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="" class="text-decoration-none custom-gucci-card">
+        <div class="custom-card-main">
+          <img src="../../resources/img/image3.png" class="z-n1 position-absolute">
+
+          <div class="z-n1 card_hover_test">
+            <span class="animated-text">Juguetes</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </main>
+
+
+  <!-- Controladores -->
+  <script src="../../resources/js/public-sidebar.js"></script>
+  <script src="../../controllers/utils/public.js"></script>
+  <script src="../../resources/js/alertas.js"></script>
+  <script src="../../resources//js/public_index.js"></script>
+
+  <!-- Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
+
+  <!-- Iconos -->
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+  <!-- SweetAlerts -->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</body>
+
+</html>
