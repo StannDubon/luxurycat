@@ -22,52 +22,35 @@ HEADER.innerHTML = `
 <nav class="navegacion">
   <ul class="ul-fixed">
     <li>
-      <a href="dashboard.html" id="sidebar-cat-dashboard">
-        <ion-icon name="grid-outline"></ion-icon>
+      <a href="index.html" id="sidebar-cat-marcas">
+        <ion-icon name="storefront-outline"></ion-icon>
         <span>Dashboard</span>
       </a>
     </li>
     <li>
-      <a href="productos.html" id="sidebar-cat-productos">
+      <a href="carrito.html" id="sidebar-cat-dashboard">
+        <ion-icon name="grid-outline"></ion-icon>
+        <span>Carrito</span>
+      </a>
+    </li>
+    <li>
+      <a href="categorias.html" id="sidebar-cat-productos">
         <ion-icon name="bag-outline"></ion-icon>
-        <span>Productos</span>
+        <span>Categorias</span>
       </a>
     </li>
     <li>
-      <a href="categorias.html" id="sidebar-cat-categorias">
+      <a href="quienes_somos.html" id="sidebar-cat-categorias">
         <ion-icon name="duplicate-outline"></ion-icon>
-        <span>Categorías</span>
+        <span>Blog</span>
       </a>
     </li>
+
     <li>
-      <a href="marca.html" id="sidebar-cat-marcas">
-        <ion-icon name="storefront-outline"></ion-icon>
-        <span>Marcas</span>
-      </a>
-    </li>
-    <li>
-      <a href="administradores.html" id="sidebar-cat-administradores">
+      <a href="pedidos.html" id="sidebar-cat-administradores">
         <ion-icon name="medical-outline"></ion-icon>
-        <span>Administradores</span>
-      </a>
-    </li>
-    <li>
-      <a href="pedidos.html" id="sidebar-cat-pedidos">
-        <ion-icon name="albums-outline"></ion-icon>
         <span>Pedidos</span>
       </a>
-    </li>
-    <li>
-      <a href="clientes.html" id="sidebar-cat-clientes">
-        <ion-icon name="people-outline"></ion-icon>
-        <span>Pedidos</span>
-      </a>
-    </li>
-    <li>
-    <a href="comentarios.html" id="sidebar-cat-comentarios">
-      <ion-icon name="star-outline"></ion-icon>
-      <span>Comentarios</span>
-    </a>
     </li>
   </ul>
 </nav>
