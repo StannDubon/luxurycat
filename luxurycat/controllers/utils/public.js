@@ -52,6 +52,12 @@ HEADER.innerHTML = `
         <span>Pedidos</span>
       </a>
     </li>
+    <li>
+    <a href="perfil.html" id="sidebar-cat-administradores">
+      <ion-icon name="medical-outline"></ion-icon>
+      <span>Perfil</span>
+    </a>
+  </li>
   </ul>
 </nav>
 
