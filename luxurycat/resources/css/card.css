@@ -119,19 +119,29 @@
     .custom-card-main {
         height: 200px;
         width: 400px;
+        border-radius: 0px;
     }
     
+    .card_hover_test {
+        border-radius: 0px;
+    }
+
     .custom-card-main img {
         height: 200px;
         width: 400px;
+        border-radius: 0px;
     }
 
     .custom-gucci-card{
-        margin: 10px;
+        margin: 0px;
     }
 
     .custom-card-gucci-container{
         padding: 0;
+    }
+
+    .card_hover_test:hover{
+        background-color: rgba(19, 19, 19, 0.664)
     }
 
 }

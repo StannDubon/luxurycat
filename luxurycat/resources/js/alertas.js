@@ -17,3 +17,16 @@ elementosEliminar.forEach(function (elemento) {
     });
   });
 });
+
+// Obtener todos los elementos con la clase .info
+var elements = document.querySelectorAll('.info');
+
+// Iterar sobre cada elemento y añadir un event listener
+elements.forEach(function(element) {
+  element.addEventListener('click', function() {
+    // Obtener el modal por su ID y mostrarlo
+    var modal = document.getElementById('exampleModal');
+    var modalInstance = new bootstrap.Modal(modal);
+    modalInstance.show();
+  });
+});
