@@ -101,31 +101,4 @@ HEADER.innerHTML = `
 </div>
 </div>`;
 
-var bodyId = document.body.id;
-
-if (bodyId === "dashboard") {
-  document.getElementById("sidebar-cat-dashboard").classList.add("selected");}
-
-else if (bodyId === "categorias") {
-  document.getElementById("sidebar-cat-categorias").classList.add("selected");}
-
-else if (bodyId === "administradores") {
-  document.getElementById("sidebar-cat-administradores").classList.add("selected");}
-
-else if (bodyId === "clientes") {
-  document.getElementById("sidebar-cat-clientes").classList.add("selected");} 
-
-else if (bodyId === "marca") {
-  document.getElementById("sidebar-cat-marcas").classList.add("selected");} 
-
-else if (bodyId === "pedidos") {
-  document.getElementById("sidebar-cat-pedidos").classList.add("selected");} 
-
-else if (bodyId === "productos") {
-  document.getElementById("sidebar-cat-productos").classList.add("selected");}
-
-else if (bodyId === "comentarios") {
-  document.getElementById("sidebar-cat-comentarios").classList.add("selected");}
-
-
 

@@ -2,340 +2,288 @@
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 
-  <link rel="stylesheet" href="../../resources/css/fonts.css" />
-  <link rel="stylesheet" href="../../resources/css/public-sidebar.css" />
-  <link rel="stylesheet" href="../../resources/css/public_categorias.css">
-  <link rel="stylesheet" href="../../resources/css/card_image_fixer.css">
+    <link rel="stylesheet" href="../../resources/css/fonts.css" />
+    <link rel="stylesheet" href="../../resources/css/public-sidebar.css" />
+    <link rel="stylesheet" href="../../resources/css/public_categorias.css">
+    <link rel="stylesheet" href="../../resources/css/card_image_fixer.css">
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
 </head>
 
 <body>
 
-  <!--Header prueba-->
+    <header></header>
 
-  <div class="menu">
-    <ion-icon name="menu-outline"></ion-icon>
-    <ion-icon name="close-outline"></ion-icon>
-  </div>
+    <main>
 
-  <div class="barra-lateral">
-    <div>
-      <div class="nombre-pagina">
-        <img src="../../resources/svg/logo.svg" alt="" id="cloud" name="cloud-outline" />
-        <span>LuxuryCat</span>
-      </div>
-    </div>
-
-    <nav class="navegacion">
-      <ul class="ul-fixed">
-        <li>
-          <a href="dashboard.html" id="sidebar-cat-dashboard">
-            <ion-icon name="grid-outline"></ion-icon>
-            <span>Dashboard</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-
-    <div>
-      <div class="linea"></div>
-
-      <div class="modo-oscuro">
-        <div class="info">
-          <ion-icon name="moon-outline"></ion-icon>
-          <span>Dark Mode</span>
+        <div class="container">
+            <h2 class="m-5">Tus Pedidos</h2>
         </div>
-        <div class="switch">
-          <div class="base">
-            <div class="circulo"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="usuario">
-        <a href="index.html">
-          <img
-            src="https://c4.wallpaperflare.com/wallpaper/950/884/848/anime-girls-icons-profile-hd-wallpaper-preview.jpg"
-            alt="Descripción de la imagen">
-        </a>
-        <div class="info-usuario">
-          <div class="nombre-email">
-            <span class="nombre">Stann</span>
-            <span class="email">stalin.dbn@gmail.com</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <main>
-
-    <div class="container">
-      <h2 class="m-5">Tus Pedidos</h2>
-    </div>
 
 
-    <div class="container-fluid mt-3">
-      <div class="row">
-        <div class="col-12">
-          <div class="card invoice-card">
-            <div class="card-body">
-              <div class="invoice-header">
-                <h2 class="invoice-title" style="align-self: center;">
-                  0003
-                </h2>
-                <div class="d-flex justify-content-between">
-                  <span><b>María Gómez Santa Ana, Colonia Escalón casa 15</b> <br> 22/05/2023</span>
-                  <span><b>Estado:</b> Enviado</span>
+        <div class="container-fluid mt-3">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card invoice-card">
+                        <div class="card-body">
+                            <div class="invoice-header">
+                                <h2 class="invoice-title" style="align-self: center;">
+                                    0003
+                                </h2>
+                                <div class="d-flex justify-content-between">
+                                    <span><b>María Gómez Santa Ana, Colonia Escalón casa 15</b> <br> 22/05/2023</span>
+                                    <span><b>Estado:</b> Enviado</span>
+                                </div>
+                            </div> <!-- /invoice-header -->
+                            <div class="table-responsive">
+                                <button id="toggleTableBtn3" class="btn btn-dark mb-3 mt-3">Mostrar Más</button>
+                                <table id="invoiceTable3" class="table" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Producto</th>
+                                            <th>Cantidad</th>
+                                            <th>Precio</th>
+                                            <th>Subtotal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Laptop</td>
+                                            <td>1</td>
+                                            <td>$699.99</td>
+                                            <td>$699.99</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Impresora</td>
+                                            <td>1</td>
+                                            <td>$129.99</td>
+                                            <td>$129.99</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Monitor</td>
+                                            <td>1</td>
+                                            <td>$249.99</td>
+                                            <td>$249.99</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="3" class="text-right"><b>TOTAL:</b></td>
+                                            <td><b>$1079.97</b></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div> <!-- /invoice-header -->
-              <div class="table-responsive">
-                <button id="toggleTableBtn3" class="btn btn-dark mb-3 mt-3">Mostrar Más</button>
-                <table id="invoiceTable3" class="table" width="100%">
-                  <thead>
-                    <tr>
-                      <th>Producto</th>
-                      <th>Cantidad</th>
-                      <th>Precio</th>
-                      <th>Subtotal</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Laptop</td>
-                      <td>1</td>
-                      <td>$699.99</td>
-                      <td>$699.99</td>
-                    </tr>
-                    <tr>
-                      <td>Impresora</td>
-                      <td>1</td>
-                      <td>$129.99</td>
-                      <td>$129.99</td>
-                    </tr>
-                    <tr>
-                      <td>Monitor</td>
-                      <td>1</td>
-                      <td>$249.99</td>
-                      <td>$249.99</td>
-                    </tr>
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <td colspan="3" class="text-right"><b>TOTAL:</b></td>
-                      <td><b>$1079.97</b></td>
-                    </tr>
-                  </tfoot>
-                </table>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-    
 
-    <div class="container-fluid mt-3">
-      <div class="row">
-        <div class="col-12">
-          <div class="card invoice-card">
-            <div class="card-body">
-              <div class="invoice-header">
-                <h2 class="invoice-title" style="align-self: center;">
-                  0002
-                </h2>
-                <div class="d-flex justify-content-between">
-                  <span><b>Luis Pérez San Salvador, Colonia Escalón casa 10</b> <br> 12/03/2022</span>
-                  <span><b>Estado:</b> Pendiente</span>
+
+        <div class="container-fluid mt-3">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card invoice-card">
+                        <div class="card-body">
+                            <div class="invoice-header">
+                                <h2 class="invoice-title" style="align-self: center;">
+                                    0002
+                                </h2>
+                                <div class="d-flex justify-content-between">
+                                    <span><b>Luis Pérez San Salvador, Colonia Escalón casa 10</b> <br> 12/03/2022</span>
+                                    <span><b>Estado:</b> Pendiente</span>
+                                </div>
+                            </div> <!-- /invoice-header -->
+                            <div class="table-responsive">
+                                <button id="toggleTableBtn2" class="btn btn-dark mb-3 mt-3">Mostrar Más</button>
+                                <table id="invoiceTable2" class="table" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Producto</th>
+                                            <th>Cantidad</th>
+                                            <th>Precio</th>
+                                            <th>Subtotal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Mouse</td>
+                                            <td>2</td>
+                                            <td>$15.99</td>
+                                            <td>$31.98</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Teclado</td>
+                                            <td>1</td>
+                                            <td>$29.99</td>
+                                            <td>$29.99</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Audífonos</td>
+                                            <td>1</td>
+                                            <td>$19.99</td>
+                                            <td>$19.99</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="3" class="text-right"><b>TOTAL:</b></td>
+                                            <td><b>$81.96</b></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div> <!-- /invoice-header -->
-              <div class="table-responsive">
-                <button id="toggleTableBtn2" class="btn btn-dark mb-3 mt-3">Mostrar Más</button>
-                <table id="invoiceTable2" class="table" width="100%">
-                  <thead>
-                    <tr>
-                      <th>Producto</th>
-                      <th>Cantidad</th>
-                      <th>Precio</th>
-                      <th>Subtotal</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Mouse</td>
-                      <td>2</td>
-                      <td>$15.99</td>
-                      <td>$31.98</td>
-                    </tr>
-                    <tr>
-                      <td>Teclado</td>
-                      <td>1</td>
-                      <td>$29.99</td>
-                      <td>$29.99</td>
-                    </tr>
-                    <tr>
-                      <td>Audífonos</td>
-                      <td>1</td>
-                      <td>$19.99</td>
-                      <td>$19.99</td>
-                    </tr>
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <td colspan="3" class="text-right"><b>TOTAL:</b></td>
-                      <td><b>$81.96</b></td>
-                    </tr>
-                  </tfoot>
-                </table>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
 
-    
 
-    <div class="container-fluid mt-3">
-      <div class="row">
-        <div class="col-12">
-          <div class="card invoice-card">
-            <div class="card-body">
-              <div class="invoice-header">
-                <h2 class="invoice-title" style="align-self: center;">
-                  0001
-                </h2>
-                <div class="d-flex justify-content-between">
-                  <span><b>Carlos Campos Sonsonate, las flores casa 5b</b> <br> 04/08/2007</span>
-                  <span><b>Estado:</b> Entregado</span>
+
+        <div class="container-fluid mt-3">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card invoice-card">
+                        <div class="card-body">
+                            <div class="invoice-header">
+                                <h2 class="invoice-title" style="align-self: center;">
+                                    0001
+                                </h2>
+                                <div class="d-flex justify-content-between">
+                                    <span><b>Carlos Campos Sonsonate, las flores casa 5b</b> <br> 04/08/2007</span>
+                                    <span><b>Estado:</b> Entregado</span>
+                                </div>
+                            </div> <!-- /invoice-header -->
+                            <div class="table-responsive">
+                                <button id="toggleTableBtn" class="btn btn-dark mb-3 mt-3">Mostrar Más</button>
+                                <table id="invoiceTable" class="table" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Producto</th>
+                                            <th>Cantidad</th>
+                                            <th>Precio</th>
+                                            <th>Subtotal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Nombre Producto</td>
+                                            <td>1</td>
+                                            <td>$9.99</td>
+                                            <td>$9.99</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Nombre Producto</td>
+                                            <td>1</td>
+                                            <td>$9.99</td>
+                                            <td>$9.99</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Nombre Producto</td>
+                                            <td>1</td>
+                                            <td>$9.99</td>
+                                            <td>$9.99</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="3" class="text-right"><b>TOTAL:</b></td>
+                                            <td><b>$29.97</b></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div> <!-- /invoice-header -->
-              <div class="table-responsive">
-                <button id="toggleTableBtn" class="btn btn-dark mb-3 mt-3">Mostrar Más</button>
-                <table id="invoiceTable" class="table" width="100%">
-                  <thead>
-                    <tr>
-                      <th>Producto</th>
-                      <th>Cantidad</th>
-                      <th>Precio</th>
-                      <th>Subtotal</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Nombre Producto</td>
-                      <td>1</td>
-                      <td>$9.99</td>
-                      <td>$9.99</td>
-                    </tr>
-                    <tr>
-                      <td>Nombre Producto</td>
-                      <td>1</td>
-                      <td>$9.99</td>
-                      <td>$9.99</td>
-                    </tr>
-                    <tr>
-                      <td>Nombre Producto</td>
-                      <td>1</td>
-                      <td>$9.99</td>
-                      <td>$9.99</td>
-                    </tr>
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <td colspan="3" class="text-right"><b>TOTAL:</b></td>
-                      <td><b>$29.97</b></td>
-                    </tr>
-                  </tfoot>
-                </table>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
 
 
 
-    
 
 
 
-  </main>
 
-  <script>
-    const toggleTableBtn = document.getElementById('toggleTableBtn');
-    const invoiceTable = document.getElementById('invoiceTable');
-    invoiceTable.classList.add('d-none');
+    </main>
 
-    toggleTableBtn.addEventListener('click', function () {
-      if (invoiceTable.classList.contains('d-none')) {
-        // Si la tabla está contraída, expandirla y cambiar el texto del botón a "Mostrar Menos"
-        invoiceTable.classList.remove('d-none');
-        toggleTableBtn.textContent = 'Mostrar Menos';
-      } else {
-        // Si la tabla está expandida, contraerla y cambiar el texto del botón a "Mostrar Más"
+    <script>
+        const toggleTableBtn = document.getElementById('toggleTableBtn');
+        const invoiceTable = document.getElementById('invoiceTable');
         invoiceTable.classList.add('d-none');
-        toggleTableBtn.textContent = 'Mostrar Más';
-      }
-    });
 
-    const toggleTableBtn2 = document.getElementById('toggleTableBtn2');
-    const invoiceTable2 = document.getElementById('invoiceTable2');
-    invoiceTable2.classList.add('d-none');
+        toggleTableBtn.addEventListener('click', function () {
+            if (invoiceTable.classList.contains('d-none')) {
+                // Si la tabla está contraída, expandirla y cambiar el texto del botón a "Mostrar Menos"
+                invoiceTable.classList.remove('d-none');
+                toggleTableBtn.textContent = 'Mostrar Menos';
+            } else {
+                // Si la tabla está expandida, contraerla y cambiar el texto del botón a "Mostrar Más"
+                invoiceTable.classList.add('d-none');
+                toggleTableBtn.textContent = 'Mostrar Más';
+            }
+        });
 
-    toggleTableBtn2.addEventListener('click', function () {
-      if (invoiceTable2.classList.contains('d-none')) {
-        // Si la tabla está contraída, expandirla y cambiar el texto del botón a "Mostrar Menos"
-        invoiceTable2.classList.remove('d-none');
-        toggleTableBtn2.textContent = 'Mostrar Menos';
-      } else {
-        // Si la tabla está expandida, contraerla y cambiar el texto del botón a "Mostrar Más"
+        const toggleTableBtn2 = document.getElementById('toggleTableBtn2');
+        const invoiceTable2 = document.getElementById('invoiceTable2');
         invoiceTable2.classList.add('d-none');
-        toggleTableBtn2.textContent = 'Mostrar Más';
-      }
-    });
 
-    const toggleTableBtn3 = document.getElementById('toggleTableBtn3');
-    const invoiceTable3 = document.getElementById('invoiceTable3');
-    invoiceTable3.classList.add('d-none');
+        toggleTableBtn2.addEventListener('click', function () {
+            if (invoiceTable2.classList.contains('d-none')) {
+                // Si la tabla está contraída, expandirla y cambiar el texto del botón a "Mostrar Menos"
+                invoiceTable2.classList.remove('d-none');
+                toggleTableBtn2.textContent = 'Mostrar Menos';
+            } else {
+                // Si la tabla está expandida, contraerla y cambiar el texto del botón a "Mostrar Más"
+                invoiceTable2.classList.add('d-none');
+                toggleTableBtn2.textContent = 'Mostrar Más';
+            }
+        });
 
-    toggleTableBtn3.addEventListener('click', function () {
-      if (invoiceTable3.classList.contains('d-none')) {
-        // Si la tabla está contraída, expandirla y cambiar el texto del botón a "Mostrar Menos"
-        invoiceTable3.classList.remove('d-none');
-        toggleTableBtn3.textContent = 'Mostrar Menos';
-      } else {
-        // Si la tabla está expandida, contraerla y cambiar el texto del botón a "Mostrar Más"
+        const toggleTableBtn3 = document.getElementById('toggleTableBtn3');
+        const invoiceTable3 = document.getElementById('invoiceTable3');
         invoiceTable3.classList.add('d-none');
-        toggleTableBtn3.textContent = 'Mostrar Más';
-      }
-    });
-  </script>
 
-  <!-- Controladores -->
-  <script src="../../resources/js/public-sidebar.js"></script>
-  <script src="../../controllers/utils/public.js"></script>
-  <script src="../../resources/js/alertas.js"></script>
-  <script src="../../resources//js/public_index.js"></script>
-
-  <!-- Bootstrap -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+        toggleTableBtn3.addEventListener('click', function () {
+            if (invoiceTable3.classList.contains('d-none')) {
+                // Si la tabla está contraída, expandirla y cambiar el texto del botón a "Mostrar Menos"
+                invoiceTable3.classList.remove('d-none');
+                toggleTableBtn3.textContent = 'Mostrar Menos';
+            } else {
+                // Si la tabla está expandida, contraerla y cambiar el texto del botón a "Mostrar Más"
+                invoiceTable3.classList.add('d-none');
+                toggleTableBtn3.textContent = 'Mostrar Más';
+            }
+        });
     </script>
 
-  <!-- Iconos -->
-  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
-  <!-- SweetAlerts -->
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+        </script>
+
+    <!-- Iconos -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <!-- SweetAlerts -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <!-- Controladores -->
+
+    <script src="../../controllers/utils/public.js"></script>
+    <script src="../../resources/js/alertas.js"></script>
+    <script src="../../resources//js/public_index.js"></script>
+    <script src="../../resources/js/public-sidebar.js"></script>
 </body>
 
 </html>
