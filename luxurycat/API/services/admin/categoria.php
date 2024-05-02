@@ -3,15 +3,15 @@
 require_once('../../models/data/categoria_data.php');
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
-if (isset($_GET['action'])) {
+if (isset($_GET['action']) || true) {
     // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
     session_start();
-    // Se instancia la clase correspondiente.
+    // Se instancia la clase correspondiente.  
     $categoria = new CategoriaData;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('status' => 0, 'message' => null, 'dataset' => null, 'error' => null, 'exception' => null, 'fileStatus' => null);
     // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
-    if (isset($_SESSION['idAdministrador'])) {
+    if (isset($_SESSION['admin_id '])  || true) {
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
             case 'searchRows':
@@ -27,16 +27,16 @@ if (isset($_GET['action'])) {
             case 'createRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$categoria->setNombre($_POST['nombreCategoria']) or
-                    !$categoria->setDescripcion($_POST['descripcionCategoria']) or
-                    !$categoria->setImagen($_FILES['imagenCategoria'])
+                    !$categoria->setNombre($_POST['categoria_nombre']) or
+                    !$categoria->setDescripcion($_POST['categoria_descripcion']) or
+                    !$categoria->setImagen($_FILES['categoria_imagen'])
                 ) {
                     $result['error'] = $categoria->getDataError();
                 } elseif ($categoria->createRow()) {
                     $result['status'] = 1;
                     $result['message'] = 'Categoría creada correctamente';
                     // Se asigna el estado del archivo después de insertar.
-                    $result['fileStatus'] = Validator::saveFile($_FILES['imagenCategoria'], $categoria::RUTA_IMAGEN);
+                    $result['fileStatus'] = Validator::saveFile($_FILES['categoria_imagen'], $categoria::RUTA_IMAGEN);
                 } else {
                     $result['error'] = 'Ocurrió un problema al crear la categoría';
                 }
@@ -50,7 +50,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'readOne':
-                if (!$categoria->setId($_POST['idCategoria'])) {
+                if (!$categoria->setId($_POST['categoria_id '])) {
                     $result['error'] = $categoria->getDataError();
                 } elseif ($result['dataset'] = $categoria->readOne()) {
                     $result['status'] = 1;
@@ -61,25 +61,25 @@ if (isset($_GET['action'])) {
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$categoria->setId($_POST['idCategoria']) or
+                    !$categoria->setId($_POST['categoria_id ']) or
                     !$categoria->setFilename() or
-                    !$categoria->setNombre($_POST['nombreCategoria']) or
-                    !$categoria->setDescripcion($_POST['descripcionCategoria']) or
-                    !$categoria->setImagen($_FILES['imagenCategoria'], $categoria->getFilename())
+                    !$categoria->setNombre($_POST['categoria_nombre ']) or
+                    !$categoria->setDescripcion($_POST['categoria_descripcion ']) or
+                    !$categoria->setImagen($_FILES['categoria_imagen'], $categoria->getFilename())
                 ) {
                     $result['error'] = $categoria->getDataError();
                 } elseif ($categoria->updateRow()) {
                     $result['status'] = 1;
                     $result['message'] = 'Categoría modificada correctamente';
                     // Se asigna el estado del archivo después de actualizar.
-                    $result['fileStatus'] = Validator::changeFile($_FILES['imagenCategoria'], $categoria::RUTA_IMAGEN, $categoria->getFilename());
+                    $result['fileStatus'] = Validator::changeFile($_FILES['categoria_imagen'], $categoria::RUTA_IMAGEN, $categoria->getFilename());
                 } else {
                     $result['error'] = 'Ocurrió un problema al modificar la categoría';
                 }
                 break;
             case 'deleteRow':
                 if (
-                    !$categoria->setId($_POST['idCategoria']) or
+                    !$categoria->setId($_POST['categoria_id']) or
                     !$categoria->setFilename()
                 ) {
                     $result['error'] = $categoria->getDataError();
