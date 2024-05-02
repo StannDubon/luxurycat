@@ -15,7 +15,6 @@ END //
 
 DELIMITER ;
 
-
 -- Función para calcular el dinero invertido de un usuario en la página
 DELIMITER //
 
