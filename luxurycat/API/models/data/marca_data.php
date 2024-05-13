@@ -53,7 +53,7 @@ class MarcaData extends MarcaHandler
         }
     
         // Si $value es un número, verificamos que esté en el rango permitido (0 o 1).
-        if (is_numeric($value) && ($value === 0 || $value === 1)) {
+        if (is_numeric($value) && ($value == 0 || $value == 1)) {
             $this->marca_estado = intval($value); // Convertimos a entero por seguridad.
             return true;
         }

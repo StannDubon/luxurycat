@@ -3,10 +3,10 @@ const MARCA_API = 'services/admin/marca.php';
 
 // Constante para establecer el formulario de buscar.
 const SEARCH_FORM = document.getElementById('searchForm');
+const SEARCH_INPUT = document.getElementById('searchInput');
 
 // Constantes para establecer los elementos de la tabla.
 const TABLE_BODY = document.getElementById('tableBody');
-
 
 // Constantes para establecer los elementos del componente Modal.
 const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
@@ -25,26 +25,40 @@ document.addEventListener('DOMContentLoaded', () => {
     fillTable();
 });
 
-
-// Método del evento para cuando se envía el formulario de buscar.
-SEARCH_FORM.addEventListener('submit', (event) => {
-    // Se evita recargar la página web después de enviar el formulario.
-    event.preventDefault();
+SEARCH_INPUT.addEventListener('input', (event) => {
     // Constante tipo objeto con los datos del formulario.
-    const FORM = new FormData(SEARCH_FORM);
+    event.preventDefault();
+    const FORM = new FormData();
+    FORM.append('search', SEARCH_INPUT.value);
     // Llamada a la función para llenar la tabla con los resultados de la búsqueda.
     fillTable(FORM);
 });
 
-/*
-// Método del evento para cuando se envía el formulario de guardar.
-SAVE_FORM.addEventListener('submit', async (event) => {
-    // Se evita recargar la página web después de enviar el formulario.
-    event.preventDefault();
-    // Se verifica la acción a realizar.
-    (ID_CATEGORIA.value) ? action = 'updateRow' : action = 'createRow';
+// Método del evento para abrir el modal de guardar.
+function openSaveModal(id) {
+    if (id) {
+        MODAL_TITLE.innerText = 'Editar Marca';
+        marca_id.value = id;
+        // Aquí puedes agregar lógica para obtener y mostrar los datos de la marca a editar
+    } else {
+        MODAL_TITLE.innerText = 'Nueva Marca';
+        marca_id.value = '';
+        marca_nombre.value = '';
+        marca_estado.checked = false;
+    }
+    SAVE_MODAL.show();
+
+    // Listener para el botón "Guardar" dentro del modal
+    const saveButton = document.getElementById('saveButton');
+    saveButton.addEventListener('click', saveForm);
+}
+
+// Método para enviar el formulario de guardar al hacer clic en el botón "Guardar" dentro del modal.
+async function saveForm() {
     // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(SAVE_FORM);
+    // Se verifica la acción a realizar.
+    const action = (marca_id.value) ? 'updateRow' : 'createRow';
     // Petición para guardar los datos del formulario.
     const DATA = await fetchData(MARCA_API, action, FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
@@ -58,8 +72,8 @@ SAVE_FORM.addEventListener('submit', async (event) => {
     } else {
         sweetAlert(2, DATA.error, false);
     }
-});
-*/
+}
+
 
 /*
 *   Función asíncrona para llenar la tabla con los registros disponibles.
@@ -69,39 +83,63 @@ SAVE_FORM.addEventListener('submit', async (event) => {
 const fillTable = async (form = null) => {
     // Se inicializa el contenido de la tabla.
     TABLE_BODY.innerHTML = '';
-    // Se verifica la acción a realizar.
-    (form) ? action = 'searchRows' : action = 'readAll';
+    // Verificar si form es null y asignar un nuevo objeto FormData en ese caso
+    if (form === null) {
+        form = new FormData();
+    }
+    // Se verifica si el campo de búsqueda está vacío.
+    const searchValue = form.get('search');
+    const action = searchValue ? 'searchRows' : 'readAll';
+
     // Petición para obtener los registros disponibles.
     const DATA = await fetchData(MARCA_API, action, form);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
-        // Se recorre el conjunto de registros fila por fila.
-        DATA.dataset.forEach(row => {
-            // Se crean y concatenan las filas de la tabla con los datos de cada registro.
+        if (action === 'searchRows' && DATA.dataset.length === 0) {
             TABLE_BODY.innerHTML += `
                 <tr>
-                <td class="col-1">${row.marca_id}</td>
-                <td class="col-1">${row.marca_nombre}</td>
-                <td class="col-2">
-                    <img src="../../resources/svg/circulo.svg" alt="" />
-                </td>
-                <td class="col-1">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-3 editar" onclick="openUpdate(${row.marca_id})">
-                                <img src="../../resources/svg/editar.svg" alt="" />
-                            </div>
-                            <div class="col-3 eliminar" onclick="openUpdate(${row.marca_id})">
-                                <img src="../../resources/svg/eliminar.svg" alt="" />
+                <td class="col-1"></td>
+                <td class="col-1"><b>${DATA.error}</b></td>
+                <td class="col-2"></td>
+                <td class="col-1"></td>
+                </tr>
+            `;
+        } else {
+            // Se recorre el conjunto de registros fila por fila.
+            DATA.dataset.forEach(row => {
+                // Se crean y concatenan las filas de la tabla con los datos de cada registro.
+                TABLE_BODY.innerHTML += `
+                    <tr>
+                    <td class="col-1">${row.marca_id}</td>
+                    <td class="col-1">${row.marca_nombre}</td>
+                    <td class="col-2">
+                        <img src="../../resources/svg/circulo.svg" alt="" />
+                    </td>
+                    <td class="col-1">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-3 editar" onclick="openUpdate(${row.marca_id})">
+                                    <img src="../../resources/svg/editar.svg" alt="" />
+                                </div>
+                                <div class="col-3 eliminar" onclick="openUpdate(${row.marca_id})">
+                                    <img src="../../resources/svg/eliminar.svg" alt="" />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </td>
-            </tr>
-            `;
-        });
+                    </td>
+                    </tr>
+                `;
+            });
+        }
     } else {
-        sweetAlert(4, DATA.error, true);
+        TABLE_BODY.innerHTML += `
+            <tr>
+            <td class="col-1"></td>
+            <td class="col-1"><b>${DATA.error}</b></td>
+            <td class="col-2"></td>
+            <td class="col-1"></td>
+            </tr>
+        `;
     }
 }
 

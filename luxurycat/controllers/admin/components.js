@@ -3,8 +3,7 @@
 *   CONTROLADOR DE USO GENERAL EN TODAS LAS PÁGINAS WEB.
 */
 // Constante para establecer la ruta base del servidor.
-const SERVER_URL = 'http://localhost/stann/LuxuryCat/luxurycat/API/';
-// C:\xampp\htdocs\stan-re-puto-y-gay\crud-practice\api
+const SERVER_URL = 'http://localhost/LuxuryCat/luxurycat/API/';
 
 /*
 *   Función para mostrar un mensaje de confirmación. Requiere la librería sweetalert para funcionar.

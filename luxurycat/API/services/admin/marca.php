@@ -26,18 +26,22 @@ if (isset($_GET['action'])) {
             break;
 
         case 'createRow':
-            $_POST = Validator::validateForm($_POST);
-            // Validación de los datos del formulario para crear una nueva marca.
-            if (
-                !$marca->setNombre($_POST['Nombre']) or
-                !$marca->setEstado($_POST['Estado'])
-            ) {
-                $result['error'] = $marca->getDataError();
-            } elseif ($marca->createRow()) {
-                $result['status'] = 1;
-                $result['message'] = 'Marca creada correctamente';
+            if (!isset($_POST['marca_nombre']) || !isset($_POST['marca_estado'])) {
+                $result['error'] = 'Los campos requeridos no están presentes en la solicitud';
             } else {
-                $result['error'] = 'Ocurrió un problema al crear la marca';
+                $_POST = Validator::validateForm($_POST);
+                // Validación de los datos del formulario para crear una nueva marca.
+                if (
+                    !$marca->setNombre($_POST['marca_nombre']) ||
+                    !$marca->setEstado($_POST['marca_estado'])
+                ) {
+                    $result['error'] = $marca->getDataError();
+                } elseif ($marca->createRow()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Marca creada correctamente';
+                } else {
+                    $result['error'] = 'Ocurrió un problema al crear la marca';
+                }
             }
             break;
 
