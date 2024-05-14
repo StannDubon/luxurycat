@@ -14,9 +14,9 @@ const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
 
 // Constantes para establecer los elementos del formulario de guardar.
 const SAVE_FORM = document.getElementById('saveForm'),
-    marca_id = document.getElementById('marca_id'),
-    marca_nombre = document.getElementById('marca_nombre'),
-    marca_estado = document.getElementById('marca_estado');
+    MARCA_ID = document.getElementById('marca_id'),
+    MARCA_NOMBRE = document.getElementById('marca_nombre'),
+    MARCA_ESTADO = document.getElementById('marca_estado');
 
 
 
@@ -34,31 +34,15 @@ SEARCH_INPUT.addEventListener('input', (event) => {
     fillTable(FORM);
 });
 
-// Método del evento para abrir el modal de guardar.
-function openSaveModal(id) {
-    if (id) {
-        MODAL_TITLE.innerText = 'Editar Marca';
-        marca_id.value = id;
-        // Aquí puedes agregar lógica para obtener y mostrar los datos de la marca a editar
-    } else {
-        MODAL_TITLE.innerText = 'Nueva Marca';
-        marca_id.value = '';
-        marca_nombre.value = '';
-        marca_estado.checked = false;
-    }
-    SAVE_MODAL.show();
 
-    // Listener para el botón "Guardar" dentro del modal
-    const saveButton = document.getElementById('saveButton');
-    saveButton.addEventListener('click', saveForm);
-}
-
-// Método para enviar el formulario de guardar al hacer clic en el botón "Guardar" dentro del modal.
-async function saveForm() {
+// Método del evento para cuando se envía el formulario de guardar.
+SAVE_FORM.addEventListener('submit', async (event) => {
+    // Se evita recargar la página web después de enviar el formulario.
+    event.preventDefault();
+    // Se verifica la acción a realizar.
+    (ID_CATEGORIA.value) ? action = 'updateRow' : action = 'createRow';
     // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(SAVE_FORM);
-    // Se verifica la acción a realizar.
-    const action = (marca_id.value) ? 'updateRow' : 'createRow';
     // Petición para guardar los datos del formulario.
     const DATA = await fetchData(MARCA_API, action, FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
@@ -72,7 +56,9 @@ async function saveForm() {
     } else {
         sweetAlert(2, DATA.error, false);
     }
-}
+});
+
+
 
 
 /*
@@ -149,7 +135,7 @@ const fillTable = async (form = null) => {
 *   Retorno: ninguno.
 */
 
-/*
+
 const openCreate = () => {
     // Se muestra la caja de diálogo con su título.
     SAVE_MODAL.show();
@@ -157,7 +143,7 @@ const openCreate = () => {
     // Se prepara el formulario.
     SAVE_FORM.reset();
 }
-*/
+
 
 /*
 *   Función asíncrona para preparar el formulario al momento de actualizar un registro.

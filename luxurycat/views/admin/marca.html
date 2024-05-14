@@ -23,12 +23,12 @@
                     aria-label="Buscar" id="searchInput" />
             </form>
             <div class="col-md-2 col-sm-12">
-                <button class="btn btn-dark w-100" data-bs-toggle="modal" data-bs-target="#saveModal">
+                <button class="btn btn-dark w-100" data-bs-toggle="modal" onclick="openCreate()">
                     Agregar
                 </button>
 
                 <!-- Modal -->
-                <form action="">
+                <div>
                     <div class="modal fade" id="saveModal" tabindex="-1" aria-labelledby="saveModal" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                             <div class="modal-content">
@@ -41,7 +41,7 @@
                                     <!-- Los campos que solicitan los datos  -->
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="mb-3">
+                                            <form id="saveModal" class="mb-3">
                                                 <label for="campo1" class="form-label">Nombre de marca</label>
                                                 <input type="text" class="form-control form-control-lg"
                                                     id="marca_nombre" name="marca_nombre" />
@@ -55,14 +55,14 @@
                                                 <button class="btn btn-dark mt-3" type="submit">
                                                     Guardar
                                                 </button>
-                                            </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
 
