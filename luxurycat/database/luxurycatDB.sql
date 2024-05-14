@@ -27,6 +27,7 @@ SELECT * FROM tb_comentarios
 
 -- Creamos las tablas 
  
+ USE luxury_cat_db
 CREATE TABLE tb_tipos_admin(
 tipo_admin_id INT PRIMARY KEY AUTO_INCREMENT,
 tipo_admin_nombre VARCHAR(100) NOT NULL 

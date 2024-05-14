@@ -21,8 +21,11 @@
     <main>
         <div class="row m-5">
             <div class="col-md-3 col-sm-12 louis-george-bold fs-3">Clientes</div>
-            <div class="col-md-5 col-sm-12">
-                <input class="form-control me-2 mb-2" type="search" placeholder="Buscar" aria-label="Buscar" />
+            <form id="searchForm" class="col-md-5 col-sm-12">
+                <input class="form-control me-2 mb-2" type="search" placeholder="Buscar" name="search"
+                    aria-label="Buscar" id="search" />
+                <button type="submit">search</button>
+            </form>
             </div>
             <div class="col-md-2 col-sm-12"></div>
         </div>
@@ -41,65 +44,10 @@
                     </tr>
                 </thead>
 
-                <body>
-                    <tr>
-                        <td class="col-2">1</td>
-                        <td class="col-2">Nombre</td>
-                        <td class="col-2">Apellido</td>
-                        <td class="col-2">Cliente1</td>
-                        <td class="col-2">Correo1@gmail</td>
-                        <td class="col-1">
-                            <img src="../../resources/svg/circulo.svg" alt="" />
-                        </td>
-                        <td class="col-1">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-3 eliminar">
-                                        <img src="../../resources/svg/eliminar.svg" alt="" />
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-2">2</td>
-                        <td class="col-2">Nombre</td>
-                        <td class="col-2">Apellido</td>
-                        <td class="col-2">Cliente2</td>
-                        <td class="col-2">Correo2@gmail</td>
-                        <td class="col-1">
-                            <img src="../../resources/svg/circulo.svg" alt="" />
-                        </td>
-                        <td class="col-1">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-3 eliminar">
-                                        <img src="../../resources/svg/eliminar.svg" alt="" />
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-2">3</td>
-                        <td class="col-2">Nombre</td>
-                        <td class="col-2">Apellido</td>
-                        <td class="col-2">Cliente3</td>
-                        <td class="col-2">Correo3@gmail</td>
-                        <td class="col-1">
-                            <img src="../../resources/svg/circulo.svg" alt="" />
-                        </td>
-                        <td class="col-1">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-3 eliminar">
-                                        <img src="../../resources/svg/eliminar.svg" alt="" />
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                </body>
+                <tbody id="tableBody">      
+
+                </tbody>
+
             </table>
         </div>
     </main>

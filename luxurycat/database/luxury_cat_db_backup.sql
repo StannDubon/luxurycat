@@ -19,6 +19,7 @@
 -- Table structure for table `tb_administrador`
 --
 
+
 DROP TABLE IF EXISTS `tb_administrador`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -52,7 +53,7 @@ UNLOCK TABLES;
 
 --
 -- Table structure for table `tb_categorias`
---
+--sss
 
 DROP TABLE IF EXISTS `tb_categorias`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -64,7 +65,7 @@ CREATE TABLE `tb_categorias` (
   `categoria_imagen` varchar(200) NOT NULL,
   `categoria_estado` tinyint(1) DEFAULT 1,
   PRIMARY KEY (`categoria_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=UTF8MB4_GENERAL_CI;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -111,7 +112,7 @@ UNLOCK TABLES;
 
 --
 -- Table structure for table `tb_detalles_pedidos`
---
+--sss
 
 DROP TABLE IF EXISTS `tb_detalles_pedidos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -203,11 +204,16 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER actualizaFechaSolicitud
-BEFORE INSERT ON tb_pedidos
-FOR EACH ROW
-BEGIN
-    SET NEW.pedido_fechaSolicitud = NOW();
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER actualizaFechaSolicitud
+
+BEFORE INSERT ON tb_pedidos
+
+FOR EACH ROW
+
+BEGIN
+
+    SET NEW.pedido_fechaSolicitud = NOW();
+
 END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
