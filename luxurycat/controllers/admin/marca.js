@@ -16,7 +16,7 @@ const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
 const SAVE_FORM = document.getElementById('saveForm'),
     MARCA_ID = document.getElementById('marca_id'),
     MARCA_NOMBRE = document.getElementById('marca_nombre'),
-    MARCA_ESTADO = document.getElementById('marca_estado');
+    MARCA = document.getElementById('marca_estado');
 
 
 
@@ -34,13 +34,12 @@ SEARCH_INPUT.addEventListener('input', (event) => {
     fillTable(FORM);
 });
 
-
 // Método del evento para cuando se envía el formulario de guardar.
 SAVE_FORM.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
     // Se verifica la acción a realizar.
-    (ID_CATEGORIA.value) ? action = 'updateRow' : action = 'createRow';
+    (MARCA_ID.value) ? action = 'updateRow' : action = 'createRow';
     // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(SAVE_FORM);
     // Petición para guardar los datos del formulario.
@@ -57,7 +56,6 @@ SAVE_FORM.addEventListener('submit', async (event) => {
         sweetAlert(2, DATA.error, false);
     }
 });
-
 
 
 

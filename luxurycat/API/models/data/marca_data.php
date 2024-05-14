@@ -50,17 +50,17 @@ class MarcaData extends MarcaHandler
         if (is_bool($value)) {
             $this->marca_estado = $value ? 1 : 0;
             return true;
-        }
-    
+        } 
         // Si $value es un número, verificamos que esté en el rango permitido (0 o 1).
-        if (is_numeric($value) && ($value == 0 || $value == 1)) {
+        elseif (is_numeric($value) && ($value == 0 || $value == 1)) {
             $this->marca_estado = intval($value); // Convertimos a entero por seguridad.
             return true;
-        }
-    
+        } 
         // Si no es un booleano ni un número válido, retornamos false indicando error.
-        $this->data_error = 'El estado debe ser un valor booleano o un número (0 o 1)';
-        return false;
+        else {
+            $this->data_error = 'El estado debe ser un valor booleano o un número (0 o 1)';
+            return false;
+        }
     }
 
     // Método para obtener el mensaje de error generado durante la validación de los datos.
