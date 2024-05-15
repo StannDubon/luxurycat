@@ -141,6 +141,31 @@ END //
 DELIMITER ;
 
 
+DROP PROCEDURE IF EXISTS cambiar_estado_marca;
+DELIMITER $$
+CREATE PROCEDURE cambiar_estado_marca(IN p_marca_id INT)
+BEGIN
+    DECLARE p_marca_estado BOOLEAN;
+    
+    -- Obtener el estado actual de la marca
+    SELECT marca_estado INTO p_marca_estado
+    FROM tb_marca
+    WHERE marca_id = p_marca_id;
+    
+    -- Actualizar el estado de la marca
+    IF p_marca_estado = 1 THEN
+        UPDATE tb_marca
+        SET marca_estado = 0
+        WHERE marca_id = p_marca_id;
+    ELSE
+        UPDATE tb_marca
+        SET marca_estado = 1
+        WHERE marca_id = p_marca_id;
+    END IF;
+END $$
+ 
+
+
 -- Función para insertar datos en tb_productos
 DELIMITER //
 

@@ -26,14 +26,13 @@ if (isset($_GET['action'])) {
             break;
 
         case 'createRow':
-            if (!isset($_POST['marca_nombre']) || !isset($_POST['marca_estado'])) {
+            if (!isset($_POST['marca_nombre'])) {
                 $result['error'] = 'Los campos requeridos no están presentes en la solicitud';
             } else {
                 $_POST = Validator::validateForm($_POST);
                 // Validación de los datos del formulario para crear una nueva marca.
                 if (
-                    !$marca->setNombre($_POST['marca_nombre']) ||
-                    !$marca->setEstado($_POST['marca_estado'])
+                    !$marca->setNombre($_POST['marca_nombre'])
                 ) {
                     $result['error'] = $marca->getDataError();
                 } elseif ($marca->createRow()) {
@@ -57,7 +56,7 @@ if (isset($_GET['action'])) {
 
         case 'readOne':
             // Lectura de una marca específica.
-            if (!$marca->setId($_POST['id'])) {
+            if (!$marca->setId($_POST['marca_id'])) {
                 $result['error'] = $marca->getDataError();
             } elseif ($result['dataset'] = $marca->readOne()) {
                 $result['status'] = 1;
@@ -70,8 +69,8 @@ if (isset($_GET['action'])) {
             $_POST = Validator::validateForm($_POST);
             // Validación de los datos del formulario para actualizar una marca.
             if (
-                !$marca->setNombre($_POST['Nombre']) or
-                !$marca->setEstado($_POST['Estado'])
+                !$marca->setNombre($_POST['marca_nombre']) or
+                !$marca->setId($_POST['marca_id'])
             ) {
                 $result['error'] = $marca->getDataError();
             } elseif ($marca->updateRow()) {
@@ -84,7 +83,7 @@ if (isset($_GET['action'])) {
 
         case 'deleteRow':
             // Eliminación de una marca.
-            if (!$marca->setId($_POST['id'])) {
+            if (!$marca->setId($_POST['marca_id'])) {
                 $result['error'] = $marca->getDataError();
             } elseif ($marca->deleteRow()) {
                 $result['status'] = 1;
@@ -93,7 +92,19 @@ if (isset($_GET['action'])) {
                 $result['error'] = 'Ocurrió un problema al eliminar la marca';
             }
             break;
-
+            // Estado
+            case 'changeState':
+                if (
+                    !$marca->setId($_POST['marca_id'])
+                ) {
+                    $result['error'] = $marca->getDataError();
+                } elseif ($marca->changeState()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Estado del cliente cambiado correctamente';
+                } else {
+                    $result['error'] = 'Ocurrió un problema al alterar el estado del cliente';
+                }
+                break;
         default:
             $result['error'] = 'Acción no disponible dentro de la sesión';
     }

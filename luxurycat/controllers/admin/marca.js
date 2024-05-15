@@ -97,7 +97,7 @@ const fillTable = async (form = null) => {
                     <td class="col-1">${row.marca_id}</td>
                     <td class="col-1">${row.marca_nombre}</td>
                     <td class="col-2">
-                        <img src="../../resources/svg/circulo.svg" alt="" />
+                        <img src="../../resources/svg/circulo.svg" alt="" onclick="openState(${row.marca_id})"/>
                     </td>
                     <td class="col-1">
                         <div class="container-fluid">
@@ -105,7 +105,7 @@ const fillTable = async (form = null) => {
                                 <div class="col-3 editar" onclick="openUpdate(${row.marca_id})">
                                     <img src="../../resources/svg/editar.svg" alt="" />
                                 </div>
-                                <div class="col-3 eliminar" onclick="openUpdate(${row.marca_id})">
+                                <div class="col-3 eliminar" onclick="openDelete(${row.marca_id})">
                                     <img src="../../resources/svg/eliminar.svg" alt="" />
                                 </div>
                             </div>
@@ -127,19 +127,114 @@ const fillTable = async (form = null) => {
     }
 }
 
+
+/*
+*   Función asíncrona para cambiar el estado de un registro.
+*   Parámetros: id (identificador del registro seleccionado).
+*   Retorno: ninguno.
+*/
+const openState = async (id) => {
+    // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
+    const RESPONSE = await confirmAction('¿Desea cambiar el estado de la marca?');
+    try {
+        // Se verifica la respuesta del mensaje.
+        if (RESPONSE) {
+            // Se define una constante tipo objeto con los datos del registro seleccionado.
+            const FORM = new FormData();
+            FORM.append('marca_id', id);
+            console.log(id);
+            // Petición para eliminar el registro seleccionado.
+            const DATA = await fetchData(MARCA_API, 'changeState', FORM);
+            console.log(DATA.status);
+            // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+            if (DATA.status) {
+                // Se muestra un mensaje de éxito.
+                await sweetAlert(1, DATA.message, true);
+                // Se carga nuevamente la tabla para visualizar los cambios.
+                fillTable();
+            } else {
+                sweetAlert(2, DATA.error, false);
+            }
+        }
+    }
+    catch (Error) {
+        console.log(Error + ' Error al cargar el mensaje');
+    }
+}
+
 /*
 *   Función para preparar el formulario al momento de insertar un registro.
 *   Parámetros: ninguno.
 *   Retorno: ninguno.
 */
-
-
 const openCreate = () => {
     // Se muestra la caja de diálogo con su título.
     SAVE_MODAL.show();
     MODAL_TITLE.textContent = 'Crear Marca';
     // Se prepara el formulario.
     SAVE_FORM.reset();
+}
+
+/*
+*   Función asíncrona para preparar el formulario al momento de actualizar un registro.
+*   Parámetros: id (identificador del registro seleccionado).
+*   Retorno: ninguno.
+*/
+const openUpdate = async (id) => {
+    // Se define un objeto con los datos del registro seleccionado.
+    const FORM = new FormData();
+    FORM.append('marca_id', id);
+    // Petición para obtener los datos del registro solicitado.
+    const DATA = await fetchData(MARCA_API, 'readOne', FORM);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    if (DATA.status) {
+        // Se muestra la caja de diálogo con su título.
+        SAVE_MODAL.show();
+
+        MODAL_TITLE.textContent = 'Actualizar marca';
+        // Se prepara el formulario.
+        SAVE_FORM.reset();
+        // Se inicializan los campos con los datos.
+        const ROW = DATA.dataset;
+        MARCA_ID.value = ROW.marca_id;
+        MARCA_NOMBRE.value = ROW.marca_nombre;
+    } else {
+        sweetAlert(2, DATA.error, false);
+    }
+
+}
+
+/*
+*   Función asíncrona para eliminar un registro.
+*   Parámetros: id (identificador del registro seleccionado).
+*   Retorno: ninguno.
+*/
+const openDelete = async (id) => {
+    // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
+    const RESPONSE = await confirmAction('¿Desea eliminar la categoría de forma permanente?');
+    try {
+        // Se verifica la respuesta del mensaje.
+        if (RESPONSE) {
+            // Se define una constante tipo objeto con los datos del registro seleccionado.
+            const FORM = new FormData();
+            FORM.append('marca_id', id);
+            // Petición para eliminar el registro seleccionado.
+            const DATA = await fetchData(MARCA_API, 'deleteRow', FORM);
+            // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+            if (DATA.status) {
+                // Se muestra un mensaje de éxito.
+                await sweetAlert(1, DATA.message, true);
+                // Se carga nuevamente la tabla para visualizar los cambios.
+                fillTable();
+            } else {
+                sweetAlert(2, DATA.error, false);
+            }
+        }
+    }
+    catch (Error) {
+        console.log(Error + ' Error al cargar el mensaje');
+    }
+
 }
 
 

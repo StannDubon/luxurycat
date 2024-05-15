@@ -27,9 +27,9 @@ class MarcaHandler
 
     public function createRow()
     {
-        $sql = 'CALL InsertarMarca(?, ?);';
+        $sql = 'Insert into tb_marca(marca_nombre) Values(?);';
 
-        $params = array($this->marca_nombre, $this->marca_estado);
+        $params = array($this->marca_nombre);
         return Database::executeRow($sql, $params);
     }
 
@@ -49,9 +49,9 @@ class MarcaHandler
     public function updateRow()
     {
         $sql = 'UPDATE tb_marca
-                SET marca_nombre = ?, marca_estado = ?
+                SET marca_nombre = ?
                 WHERE marca_id = ?';
-        $params = array($this->marca_nombre, $this->marca_estado, $this->marca_id);
+        $params = array($this->marca_nombre, $this->marca_id);
         return Database::executeRow($sql, $params);
     }
 
@@ -59,6 +59,14 @@ class MarcaHandler
     {
         $sql = 'DELETE FROM tb_marca
                 WHERE marca_id = ?';
+        $params = array($this->marca_id);
+        return Database::executeRow($sql, $params);
+    }
+
+    //Función para cambiar el estado de una marca.
+    public function changeState()
+    {
+        $sql = 'CALL cambiar_estado_marca(?);';
         $params = array($this->marca_id);
         return Database::executeRow($sql, $params);
     }
