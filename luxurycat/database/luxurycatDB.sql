@@ -27,6 +27,7 @@ SELECT * FROM tb_comentarios
 
 -- Creamos las tablas 
  
+ USE luxury_cat_db
 CREATE TABLE tb_tipos_admin(
 tipo_admin_id INT PRIMARY KEY AUTO_INCREMENT,
 tipo_admin_nombre VARCHAR(100) NOT NULL 
@@ -51,9 +52,15 @@ usuario_apellido VARCHAR(100) NOT NULL,
 usuario_usuario VARCHAR(100) NOT NULL,
 usuario_contraseña VARCHAR(100) NOT NULL,
 usuario_correo VARCHAR(100) NOT NULL,
-usuario_estado boolean NOT NULL DEFAULT 1,
-usuario_imagen VARCHAR (25) 
+usuario_estado boolean NOT NULL DEFAULT 1
 );
+
+
+
+
+
+
+
 
 CREATE TABLE tb_pedidos(
 pedido_id INT PRIMARY KEY AUTO_INCREMENT, 
