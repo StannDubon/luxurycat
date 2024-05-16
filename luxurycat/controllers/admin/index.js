@@ -1,7 +1,9 @@
 // Constante para establecer el formulario de registro del primer usuario.
 const SIGNUP_FORM = document.getElementById('signupForm');
+const SIGNUP_FORMCONTAINER = document.getElementById('SignUpFormContainer')
 // Constante para establecer el formulario de inicio de sesión.
 const LOGIN_FORM = document.getElementById('loginForm');
+const LOGIN_FORMCONTAINER = document.getElementById('LogInFormContainer')
 
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', async () => {
@@ -17,21 +19,21 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Se establece el título del contenido principal.
         // MAIN_TITLE.textContent = 'Iniciar sesión';
         // Se muestra el formulario para iniciar sesión.
-        LOGIN_FORM.classList.remove('d-none');
+        LOGIN_FORMCONTAINER.classList.remove('d-none');
         sweetAlert(4, DATA.message, true);
     } else {
         // Se establece el título del contenido principal.
         // MAIN_TITLE.textContent = 'Registrar primer usuario';
         console.log("Registrar primer usuario")
         // Se muestra el formulario para registrar el primer usuario.
-        //SIGNUP_FORM.classList.remove('d-none');
+        SIGNUP_FORMCONTAINER.classList.remove('d-none');
         sweetAlert(4, DATA.error, true);
     }
 });
 
 
 // Método del evento para cuando se envía el formulario de registro del primer usuario.
-SIGNUP_FORM.addEventListener('submit', async (event) => {
+/*SIGNUP_FORM.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
     // Constante tipo objeto con los datos del formulario.
@@ -44,7 +46,7 @@ SIGNUP_FORM.addEventListener('submit', async (event) => {
     } else {
         sweetAlert(2, DATA.error, false);
     }
-});
+});*/
 
 // Método del evento para cuando se envía el formulario de inicio de sesión.
 LOGIN_FORM.addEventListener('submit', async (event) => {
