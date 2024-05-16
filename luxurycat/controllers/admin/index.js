@@ -1,5 +1,5 @@
 // Constante para establecer el formulario de registro del primer usuario.
-// const SIGNUP_FORM = document.getElementById('signupForm');
+const SIGNUP_FORM = document.getElementById('signupForm');
 // Constante para establecer el formulario de inicio de sesión.
 const LOGIN_FORM = document.getElementById('loginForm');
 
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
-/*
+
 // Método del evento para cuando se envía el formulario de registro del primer usuario.
 SIGNUP_FORM.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
@@ -44,7 +44,7 @@ SIGNUP_FORM.addEventListener('submit', async (event) => {
     } else {
         sweetAlert(2, DATA.error, false);
     }
-});*/
+});
 
 // Método del evento para cuando se envía el formulario de inicio de sesión.
 LOGIN_FORM.addEventListener('submit', async (event) => {
