@@ -35,11 +35,23 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form id="saveForm" class="mb-3">
+                                <form id="saveForm" class="mb-3 d-flex flex-column justify-content-center">
                                     <input type="hidden" id="marca_id" name="marca_id" />
-                                    <div class="mb-3">
+                                    <div class="mb-3 col-md-10">
                                         <label for="marca_nombre" class="form-label">Nombre de marca</label>
                                         <input type="text" class="form-control" id="marca_nombre" name="marca_nombre" />
+                                    </div>
+
+                                    <div class="row mb-2 col-md-6">
+                                        <div class="col-md-6 col-sm-12 form-check d-flex align-items-center column-gap-2">
+                                            <input class="form-check-input" type="radio" name="marca_estado" id="activo" value="1">
+                                            <label class="form-check-label" for="activo"> Sí </label>
+                                        </div>
+
+                                        <div class="col-md-6 col-sm-12 form-check d-flex align-items-center column-gap-2">
+                                            <input class="form-check-input" type="radio" name="marca_estado" id="inactivo" value="0">
+                                            <label class="form-check-label" for="inactivo">No</label>
+                                        </div>
                                     </div>
                                     <button type="submit" class="btn btn-dark mt-3">Guardar</button>
                                 </form>
@@ -82,11 +94,8 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <!-- Controladores -->
+    <script src="../../controllers/utils/components.js"></script>
     <script src="../../controllers/utils/admin.js"></script>
-    <script src="../../resources/js/alertas.js"></script>
-    <script src="../../resources/js/private-sidebar.js"></script>
-
-    <script src="../../controllers/admin/components.js"></script>
     <script src="../../controllers/admin/marca.js"></script>
 
 </body>
