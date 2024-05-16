@@ -25,21 +25,21 @@
                     <div class="card-body ">
                         <h5 class="card-title text-center mb-4">Iniciar sesión</h5>
                         <!-- Formulario de inicio de sesión -->
-                        <form>
+                        <form id="loginForm">
                             <div class="mb-3">
                                 <label for="inputEmail" class="form-label">Nombre de Usuario</label>
-                                <input type="email" class="form-control" id="inputEmail" placeholder="Usuario">
+                                <input class="form-control" id="admin_usuario" name="admin_usuario" placeholder="Usuario">
                             </div>
                             <div class="mb-3">
                                 <label for="inputPassword" class="form-label">Contraseña</label>
-                                <input type="password" class="form-control" id="inputPassword" placeholder="Contraseña">
+                                <input type="password" class="form-control" id="admin_contraseña" name="admin_contraseña" placeholder="Contraseña">
                             </div>
                             <div class="mb-3">
                                 <a href=""><label class="text" for="rememberCheck">¿Olvidaste tu contaseña?</label></a>
                             </div>
-                            <a href="../../views/admin/dashboard.html" class="btn btn-dark">
+                            <button class="btn btn-dark" type="submit">
                                 Iniciar sesión
-                            </a>
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -49,7 +49,16 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-        </script>
+    </script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script src="../../controllers/utils/components.js"></script>
+    <script src="../../controllers/utils/admin.js"></script>
+    <script src="../../controllers/admin/index.js"></script>
+    
+   
+    
 </body>
 
 </html>
