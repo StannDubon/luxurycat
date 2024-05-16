@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 // Método del evento para cuando se envía el formulario de registro del primer usuario.
-/*SIGNUP_FORM.addEventListener('submit', async (event) => {
+SIGNUP_FORM.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
     // Constante tipo objeto con los datos del formulario.
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     } else {
         sweetAlert(2, DATA.error, false);
     }
-});*/
+});
 
 // Método del evento para cuando se envía el formulario de inicio de sesión.
 LOGIN_FORM.addEventListener('submit', async (event) => {

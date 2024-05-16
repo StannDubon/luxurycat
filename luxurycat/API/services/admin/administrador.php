@@ -158,16 +158,16 @@ if (isset($_GET['action'])) {
             case 'signUp':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$administrador->setNombre($_POST['admin_nombre']) or
-                    !$administrador->setApellido($_POST['admin_apellido']) or
-                    !$administrador->setCorreo($_POST['admin_correo']) or
-                    !$administrador->setUsuario($_POST['admin_usuario']) or
-                    !$administrador->setContraseña($_POST['admin_contraseña']) or
+                    !$administrador->setNombre($_POST['SU_admin_nombre']) or
+                    !$administrador->setApellido($_POST['SU_admin_apellido']) or
+                    !$administrador->setCorreo($_POST['SU_admin_correo']) or
+                    !$administrador->setUsuario($_POST['SU_admin_usuario']) or
+                    !$administrador->setContraseña($_POST['SU_admin_contraseña']) or
                     !$administrador->setEstado(1)
                     
                 ) {
                     $result['error'] = $administrador->getDataError();
-                } elseif ($_POST['admin_contraseña'] != $_POST['confirmar_contraseña']) {
+                } elseif ($_POST['SU_admin_contraseña'] != $_POST['SU_confirmar_contraseña']) {
                     $result['error'] = 'Contraseñas diferentes';
                 } elseif ($administrador->createRow()) {
                     $result['status'] = 1;
