@@ -1,69 +1,106 @@
 <?php
-// Se incluye la clase para validar los datos de entrada.
-require_once('../../helpers/validator.php');
 
-// Se incluye la clase padre.
+require_once('../../helpers/validator.php');
 require_once('../../models/handler/administrador_handler.php');
 
-/*
- *  Clase para manejar el encapsulamiento de los datos de la tabla USUARIO.
-*/
-class AdminData extends administradorHandler
+class AdministradorData extends AdministradorHandler
 {
     private $data_error = null;
 
-    // Método para establecer el identificador de la marca.
     public function setId($value)
     {
-        // Validación del identificador como número natural.
         if (Validator::validateNaturalNumber($value)) {
             $this->admin_id = $value;
             return true;
         } else {
-            // Si la validación falla, se establece un mensaje de error.
-            $this->data_error = 'El identificador de administradores es incorrecto';
+            $this->data_error = 'El identificador del administrador es incorrecto';
             return false;
         }
     }
 
-    // Método para establecer el nombre de la marca.
     public function setNombre($value, $min = 2, $max = 50)
     {
-        // Validación del nombre como texto alfabético y longitud dentro de un rango dado.
         if (!Validator::validateAlphabetic($value)) {
-            $this->data_error = 'El nombre del administrador debe ser alfabético';
+            $this->data_error = 'El nombre debe ser un valor alfabético';
             return false;
-        } elseif (!Validator::validateLength($value, $min, $max)) {
-            $this->data_error = 'El nombre del administrador debe tener una longitud entre ' . $min . ' y ' . $max;
-            return false;
-        } else {
-            // Si la validación es exitosa, se asigna el nombre.
+        } elseif (Validator::validateLength($value, $min, $max)) {
             $this->admin_nombre = $value;
             return true;
+        } else {
+            $this->data_error = 'El nombre debe tener una longitud entre ' . $min . ' y ' . $max;
+            return false;
         }
     }
 
-    // Método para establecer el estado de la marca.
+    public function setApellido($value, $min = 2, $max = 50)
+    {
+        if (!Validator::validateAlphabetic($value)) {
+            $this->data_error = 'El apellido debe ser un valor alfabético';
+            return false;
+        } elseif (Validator::validateLength($value, $min, $max)) {
+            $this->admin_apellido = $value;
+            return true;
+        } else {
+            $this->data_error = 'El apellido debe tener una longitud entre ' . $min . ' y ' . $max;
+            return false;
+        }
+    }
+
+    public function setCorreo($value, $min = 8, $max = 100)
+    {
+        if (!Validator::validateEmail($value)) {
+            $this->data_error = 'El correo no es válido';
+            return false;
+        } elseif (Validator::validateLength($value, $min, $max)) {
+            $this->admin_correo = $value;
+            return true;
+        } else {
+            $this->data_error = 'El correo debe tener una longitud entre ' . $min . ' y ' . $max;
+            return false;
+        }
+    }
+
+    public function setUsuario($value, $min = 6, $max = 25)
+    {
+        if (!Validator::validateAlphanumeric($value)) {
+            $this->data_error = 'El usuario debe ser un valor alfanumérico';
+            return false;
+        } elseif (Validator::validateLength($value, $min, $max)) {
+            $this->admin_usuario = $value;
+            return true;
+        } else {
+            $this->data_error = 'El usuario debe tener una longitud entre ' . $min . ' y ' . $max;
+            return false;
+        }
+    }
+
+    public function setContraseña($value)
+    {
+        if (Validator::validatePassword($value)) {
+            $this->admin_contraseña = password_hash($value, PASSWORD_DEFAULT);
+            return true;
+        } else {
+            $this->data_error = Validator::getPasswordError();
+            return false;
+        }
+    }
+
     public function setEstado($value)
     {
-        // Si $value es un booleano, lo transformamos en un número entero (0 o 1).
         if (is_bool($value)) {
             $this->admin_estado = $value ? 1 : 0;
             return true;
-        }
-    
-        // Si $value es un número, verificamos que esté en el rango permitido (0 o 1).
-        if (is_numeric($value) && ($value === 0 || $value === 1)) {
+        } 
+        elseif (is_numeric($value) && ($value == 0 || $value == 1)) {
             $this->admin_estado = intval($value); // Convertimos a entero por seguridad.
             return true;
+        } 
+        else {
+            $this->data_error = 'El estado debe ser un valor booleano o un número (0 o 1)';
+            return false;
         }
-    
-        // Si no es un booleano ni un número válido, retornamos false indicando error.
-        $this->data_error = 'El estado debe ser un valor booleano o un número (0 o 1)';
-        return false;
     }
 
-    // Método para obtener el mensaje de error generado durante la validación de los datos.
     public function getDataError()
     {
         return $this->data_error;

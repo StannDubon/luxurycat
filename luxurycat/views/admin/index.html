@@ -18,28 +18,28 @@
 
     <header></header>
 
-    <div class="container mt-5">
+    <div class="container mt-5 d-none" id="LogInFormContainer">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body ">
                         <h5 class="card-title text-center mb-4">Iniciar sesión</h5>
                         <!-- Formulario de inicio de sesión -->
-                        <form>
+                        <form id="loginForm">
                             <div class="mb-3">
                                 <label for="inputEmail" class="form-label">Nombre de Usuario</label>
-                                <input type="email" class="form-control" id="inputEmail" placeholder="Usuario">
+                                <input class="form-control" id="admin_usuario" name="admin_usuario" placeholder="Usuario">
                             </div>
                             <div class="mb-3">
                                 <label for="inputPassword" class="form-label">Contraseña</label>
-                                <input type="password" class="form-control" id="inputPassword" placeholder="Contraseña">
+                                <input type="password" class="form-control" id="admin_contraseña" name="admin_contraseña" placeholder="Contraseña">
                             </div>
                             <div class="mb-3">
                                 <a href=""><label class="text" for="rememberCheck">¿Olvidaste tu contaseña?</label></a>
                             </div>
-                            <a href="../../views/admin/dashboard.html" class="btn btn-dark">
+                            <button class="btn btn-dark" type="submit">
                                 Iniciar sesión
-                            </a>
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -47,9 +47,55 @@
         </div>
     </div>
 
+    <div class="container d-none" id="SignUpFormContainer">
+        <div class="row">
+          <div class="col-md-6 offset-md-3 form-container">
+            <form id="signupForm">
+              <div class="mb-3">
+                <label for="admin_nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="SU_admin_nombre" name="SU_admin_nombre" required>
+              </div>
+              <div class="mb-3">
+                <label for="admin_apellido" class="form-label">Apellido</label>
+                <input type="text" class="form-control" id="SU_admin_apellido" name="SU_admin_apellido" required>
+              </div>
+              <div class="mb-3">
+                <label for="admin_correo" class="form-label">Correo</label>
+                <input type="email" class="form-control" id="SU_admin_correo" name="SU_admin_correo" required>
+              </div>
+              <div class="mb-3">
+                <label for="admin_usuario" class="form-label">Usuario</label>
+                <input type="text" class="form-control" id="SU_admin_usuario" name="SU_admin_usuario" required>
+              </div>
+              <div class="mb-3">
+                <label for="admin_contraseña" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" id="SU_admin_contraseña" name="SU_admin_contraseña" required>
+              </div>
+              <!-- Campo Estado oculto -->
+              <input type="hidden" id="SU_admin_estado" name="SU_admin_estado" value="1">
+              <!-- Confirmar Contraseña -->
+              <div class="mb-3">
+                <label for="confirmar_contraseña" class="form-label">Confirmar Contraseña</label>
+                <input type="password" class="form-control" id="SU_confirmar_contraseña" name="SU_confirmar_contraseña" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Registrar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-        </script>
+    </script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script src="../../controllers/utils/components.js"></script>
+    <script src="../../controllers/utils/admin.js"></script>
+    <script src="../../controllers/admin/index.js"></script>
+    
+   
+    
 </body>
 
 </html>
