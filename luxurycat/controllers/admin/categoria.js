@@ -1,5 +1,5 @@
 // Constante para completar la ruta de la API.
-const MARCA_API = 'services/admin/marca.php';
+const CATEGORIA_API = 'services/admin/categoria.php';
 
 // Constante para establecer el formulario de buscar.
 const SEARCH_FORM = document.getElementById('searchForm');
@@ -45,7 +45,7 @@ SAVE_FORM.addEventListener('submit', async (event) => {
     // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(SAVE_FORM);
     // Petición para guardar los datos del formulario.
-    const DATA = await fetchData(MARCA_API, action, FORM);
+    const DATA = await fetchData(CATEGORIA_API, action, FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se cierra la caja de diálogo.
@@ -75,7 +75,7 @@ const fillTable = async (form = null) => {
     const searchValue = form.get('search');
     const action = searchValue ? 'searchRows' : 'readAll';
 
-    const DATA = await fetchData(MARCA_API, action, form);
+    const DATA = await fetchData(CATEGORIA_API, action, form);
     if (DATA.status) {
         if (action === 'searchRows' && DATA.dataset.length === 0) {
             TABLE_BODY.innerHTML += `
@@ -147,7 +147,7 @@ const openState = async (id) => {
             const FORM = new FormData();
             FORM.append('marca_id', id);
             console.log(id);
-            const DATA = await fetchData(MARCA_API, 'changeStatus', FORM);
+            const DATA = await fetchData(CATEGORIA_API, 'changeStatus', FORM);
             console.log(DATA.status);
             if (DATA.status) {
                 await sweetAlert(1, DATA.message, true);
@@ -181,7 +181,7 @@ const openCreate = () => {
 const openUpdate = async (id) => {
     const FORM = new FormData();
     FORM.append('marca_id', id);
-    const DATA = await fetchData(MARCA_API, 'readOne', FORM);
+    const DATA = await fetchData(CATEGORIA_API, 'readOne', FORM);
     if (DATA.status) {
         SAVE_MODAL.show();
 
@@ -213,7 +213,7 @@ const openDelete = async (id) => {
         if (RESPONSE) {
             const FORM = new FormData();
             FORM.append('marca_id', id);
-            const DATA = await fetchData(MARCA_API, 'deleteRow', FORM);
+            const DATA = await fetchData(CATEGORIA_API, 'deleteRow', FORM);
             if (DATA.status) {
                 await sweetAlert(1, DATA.message, true);
                 fillTable();

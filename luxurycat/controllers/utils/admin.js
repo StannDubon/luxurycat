@@ -103,8 +103,8 @@ const loadTemplate = async () => {
             </div>
           </div>
         
-          <div class="usuario">
-            <a href="index.html">
+          <div class="usuario" >
+            <a onclick="logOut()">
               <img src="https://c4.wallpaperflare.com/wallpaper/950/884/848/anime-girls-icons-profile-hd-wallpaper-preview.jpg" alt="Descripción de la imagen">
             </a>
             <div class="info-usuario">
@@ -116,21 +116,23 @@ const loadTemplate = async () => {
           </div>
         </div>
       </div>`;
-      loadTemplateSelection();
+      
       loadTemplateJs();
+      loadTemplateSelection();
       
     } else {
       sweetAlert(3, DATA.error, false, "index.html");
     }
   } else {
     // Se comprueba si la página web es la principal, de lo contrario se direcciona a iniciar sesión.
-    if (location.pathname.endsWith("index.html")) {
-      console.log("wiuwiuwiu")
-    } else {
+    if (!location.pathname.endsWith("index.html")) {
       location.href = "index.html";
+    } else {
+      console.log("Logged")
     }
   }
 };
+
 
 
 const loadTemplateSelection = async () => {
@@ -144,8 +146,7 @@ const loadTemplateSelection = async () => {
     productos: "sidebar-cat-productos",
     comentarios: "sidebar-cat-comentarios"
   };
-
-  const bodyId = "dashboard"; // Aquí puedes obtener el bodyId de alguna manera, ya sea a través de un parámetro de la función o de otra fuente.
+  var bodyId = document.body.id; // Aquí puedes obtener el bodyId de alguna manera, ya sea a través de un parámetro de la función o de otra fuente.
 
   const sidebarElementId = sidebarMap[bodyId];
   if (sidebarElementId) {

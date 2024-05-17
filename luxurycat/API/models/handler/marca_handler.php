@@ -12,7 +12,7 @@ class MarcaHandler
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = 'SELECT * FROM tb_marcas where marca_nombre LIKE ?';
+        $sql = 'SELECT * FROM tb_marcas where marca_nombre LIKE ?;';
         $params = array($value);
         return Database::getRows($sql, $params);
     }
@@ -29,7 +29,7 @@ class MarcaHandler
     /* LEER TABLA */
     public function readAll()
     {
-        $sql = 'SELECT * FROM tb_marcas';
+        $sql = 'SELECT * FROM tb_marcas;';
         return Database::getRows($sql);
     }
 
@@ -54,8 +54,15 @@ class MarcaHandler
     /* ELIMINAR */
     public function deleteRow()
     {
-        $sql = 'DELETE FROM tb_marcas
-                WHERE marca_id = ?';
+        $sql = 'UPDATE tb_productos SET marca_id = NULL WHERE marca_id = ?;
+                DELETE FROM tb_marcas WHERE marca_id = ?;';
+        $params = array($this->marca_id, $this->marca_id);
+        return Database::executeRow($sql, $params);
+    }
+
+    public function changeStatus()
+    {
+        $sql = 'UPDATE tb_marcas SET marca_estado = NOT marca_estado WHERE marca_id=?';
         $params = array($this->marca_id);
         return Database::executeRow($sql, $params);
     }

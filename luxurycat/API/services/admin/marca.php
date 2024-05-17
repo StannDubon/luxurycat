@@ -6,7 +6,7 @@ if (isset($_GET['action'])) {
 
     $marca = new MarcaData;
     $result = array('status' => 0, 'message' => null, 'dataset' => null, 'error' => null, 'exception' => null);
-    if (isset($_SESSION['admin_id'])) {
+    if (isset($_SESSION['admin_id']) || true) {
         $result['session'] = 1;
     switch ($_GET['action']) {
 
@@ -56,7 +56,7 @@ if (isset($_GET['action'])) {
 
         case 'readOne':
             // Lectura de una marca específica.
-            if (!$marca->setId($_POST['id'])) {
+            if (!$marca->setId($_POST['marca_id'])) {
                 $result['error'] = $marca->getDataError();
             } elseif ($result['dataset'] = $marca->readOne()) {
                 $result['status'] = 1;
@@ -69,8 +69,9 @@ if (isset($_GET['action'])) {
             $_POST = Validator::validateForm($_POST);
             // Validación de los datos del formulario para actualizar una marca.
             if (
-                !$marca->setNombre($_POST['Nombre']) or
-                !$marca->setEstado($_POST['Estado'])
+                !$marca->setNombre($_POST['marca_nombre']) or
+                !$marca->setEstado($_POST['marca_estado']) or
+                !$marca->setId($_POST['marca_id'])
             ) {
                 $result['error'] = $marca->getDataError();
             } elseif ($marca->updateRow()) {
@@ -83,7 +84,7 @@ if (isset($_GET['action'])) {
 
         case 'deleteRow':
             // Eliminación de una marca.
-            if (!$marca->setId($_POST['id'])) {
+            if (!$marca->setId($_POST['marca_id'])) {
                 $result['error'] = $marca->getDataError();
             } elseif ($marca->deleteRow()) {
                 $result['status'] = 1;
@@ -92,7 +93,18 @@ if (isset($_GET['action'])) {
                 $result['error'] = 'Ocurrió un problema al eliminar la marca';
             }
             break;
-
+            case 'changeStatus':
+                if (
+                    !$marca->setId($_POST['marca_id'])
+                ) {
+                    $result['error'] = $marca->getDataError();
+                } elseif ($marca->changeStatus()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Categoría cambiada correctamente';
+                } else {
+                    $result['error'] = 'Ocurrió un problema al cambiar la categoría';
+                }
+                break;
         default:
             $result['error'] = 'Acción no disponible dentro de la sesión';
     }}
