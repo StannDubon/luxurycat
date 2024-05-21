@@ -34,11 +34,11 @@ class PedidoHandler
 
     public function readAll()
     {
-        $sql = "SELECT p.pedido_id AS 'ID del Pedido',
-            CONCAT(u.usuario_nombre, ' ', u.usuario_apellido) AS 'Nombre del Cliente',
-            SUM(dp.detalle_precio * dp.detalle_cantidad) AS 'Precio Total',
-            p.pedido_direccion AS 'Dirección',
-            p.pedido_estado AS 'Estado'
+        $sql = "SELECT p.pedido_id AS 'id_pedido',
+            CONCAT(u.usuario_nombre, ' ', u.usuario_apellido) AS 'nombre_cliente',
+            SUM(dp.detalle_precio * dp.detalle_cantidad) AS 'precio_total',
+            p.pedido_direccion AS 'direccion',
+            p.pedido_estado AS 'estado'
             FROM tb_pedidos p
             INNER JOIN tb_usuarios u ON p.usuario_id = u.usuario_id
             INNER JOIN tb_detalles_pedidos dp ON p.pedido_id = dp.pedido_id
@@ -48,11 +48,11 @@ class PedidoHandler
 
     public function readOne()
     {
-        $sql = "SELECT p.pedido_id AS 'ID del Pedido',
-            CONCAT(u.usuario_nombre, ' ', u.usuario_apellido) AS 'Nombre del Cliente',
-            SUM(dp.detalle_precio * dp.detalle_cantidad) AS 'Precio Total',
-            p.pedido_direccion AS 'Dirección',
-            p.pedido_estado AS 'Estado'
+        $sql = "SELECT p.pedido_id AS 'id_pedido',
+            CONCAT(u.usuario_nombre, ' ', u.usuario_apellido) AS 'nombre_cliente',
+            SUM(dp.detalle_precio * dp.detalle_cantidad) AS 'precio_total',
+            p.pedido_direccion AS 'direccion',
+            p.pedido_estado AS 'estado'
             FROM tb_pedidos p
             INNER JOIN tb_usuarios u ON p.usuario_id = u.usuario_id
             INNER JOIN tb_detalles_pedidos dp ON p.pedido_id = dp.pedido_id

@@ -14,8 +14,7 @@ class CategoriaHandler
         $value = '%' . Validator::getSearchValue() . '%';
         $sql = 'SELECT categoria_id, categoria_nombre, categoria_descripcion, categoria_estado
                 FROM tb_categorias
-                WHERE categoria_nombre LIKE ? OR categoria_descripcion LIKE ?
-                ORDER BY categoria_nombre';
+                WHERE categoria_nombre LIKE ? OR categoria_descripcion LIKE ?';
         $params = array($value, $value);
         return Database::getRows($sql, $params);
     }
@@ -31,8 +30,7 @@ class CategoriaHandler
     public function readAll()
     {
         $sql = 'SELECT categoria_id, categoria_nombre, categoria_descripcion, categoria_estado
-                FROM tb_categorias
-                ORDER BY categoria_nombre';
+                FROM tb_categorias';
         return Database::getRows($sql);
     }
 
@@ -56,7 +54,16 @@ class CategoriaHandler
 
     public function deleteRow()
     {
-        $sql = 'CALL eliminarCategoria(?);';
+        $sql = "
+        UPDATE tb_productos SET categoria_id = NULL WHERE categoria_id = ?;
+        DELETE FROM tb_categorias WHERE categoria_id = ?;";
+        $params = array($this->id, $this->id);
+        return Database::executeRow($sql, $params);
+    }
+
+    public function changeStatus()
+    {
+        $sql = 'UPDATE tb_categorias SET categoria_estado = NOT categoria_estado WHERE categoria_id=?';
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }

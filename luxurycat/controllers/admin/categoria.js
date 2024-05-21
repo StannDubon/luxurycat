@@ -14,8 +14,9 @@ const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
 
 // Constantes para establecer los elementos del formulario de guardar.
 const SAVE_FORM = document.getElementById('saveForm'),
-    MARCA_ID = document.getElementById('marca_id'),
-    MARCA_NOMBRE = document.getElementById('marca_nombre');
+    CATEGORIA_ID = document.getElementById('categoria_id'),
+    CATEGORIA_NOMBRE = document.getElementById('categoria_nombre');
+    CATEGORIA_DESCRIPCION = document.getElementById('categoria_descripcion');
 
 const RADIO_ESTADO_ACTIVO = document.getElementById("activo");
 const RADIO_ESTADO_INACTIVO = document.getElementById("inactivo");
@@ -26,6 +27,12 @@ document.addEventListener('DOMContentLoaded', () => {
     loadTemplate()
     fillTable();
 });
+
+const openCreate = () => {
+    SAVE_MODAL.show();
+    MODAL_TITLE.textContent = 'Crear Marca';
+    SAVE_FORM.reset();
+}
 
 SEARCH_INPUT.addEventListener('input', (event) => {
     // Constante tipo objeto con los datos del formulario.
@@ -41,7 +48,7 @@ SAVE_FORM.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
     // Se verifica la acción a realizar.
-    (MARCA_ID.value) ? action = 'updateRow' : action = 'createRow';
+    (CATEGORIA_ID.value) ? action = 'updateRow' : action = 'createRow';
     // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(SAVE_FORM);
     // Petición para guardar los datos del formulario.
@@ -50,7 +57,7 @@ SAVE_FORM.addEventListener('submit', async (event) => {
     if (DATA.status) {
         // Se cierra la caja de diálogo.
         SAVE_MODAL.hide();
-        MARCA_ID.value=null
+        CATEGORIA_ID.value=null
         // Se muestra un mensaje de éxito.
         sweetAlert(1, DATA.message, true);
         // Se carga nuevamente la tabla para visualizar los cambios.
@@ -80,39 +87,39 @@ const fillTable = async (form = null) => {
         if (action === 'searchRows' && DATA.dataset.length === 0) {
             TABLE_BODY.innerHTML += `
                 <tr>
-                <td class="col-1"></td>
-                <td class="col-1"><b>${DATA.error}</b></td>
                 <td class="col-2"></td>
-                <td class="col-1"></td>
+                <td class="col-4"><b>${DATA.error}</b></td>
+                <td class="col-2"></td>
+                <td class="col-2"></td>
+                <td class="col-2"></td>
                 </tr>
             `;
         } else {
             DATA.dataset.forEach(row => {
                 let color_estado;
     
-                if (row.marca_estado == 1) {
+                if (row.categoria_estado == 1) {
                     color_estado = "#71D17A";
                 } else {
                     color_estado = "#F87777";
                 }
                 TABLE_BODY.innerHTML += `
                     <tr>
-                    <td class="col-1">${row.marca_id}</td>
-                    <td class="col-1">${row.marca_nombre}</td>
+                    <td class="col-2">${row.categoria_id}</td>
+                    <td class="col-4">${row.categoria_nombre}</td>
+                    <td class="col-2">${row.categoria_descripcion}</td>
                     <td class="col-2">
 
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: ${color_estado};" onclick="openState(${row.marca_id})">
-                        <path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2z"></path></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: ${color_estado};" onclick="openState(${row.categoria_id})">
+                    <path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2z"></path></svg>
 
                     </td>
-                    <td class="col-1">
+                    <td class="col-2">
                         <div class="container-fluid">
                             <div class="row">
-                                <div class="col-3 editar" onclick="openUpdate(${row.marca_id})">
-                                    <img src="../../resources/svg/editar.svg" alt="" />
+                                <div class="col-3 editar"  onclick="openUpdate(${row.categoria_id})"> <img src="../../resources/svg/editar.svg" alt="" />
                                 </div>
-                                <div class="col-3 eliminar" onclick="openDelete(${row.marca_id})">
-                                    <img src="../../resources/svg/eliminar.svg" alt="" />
+                                <div class="col-3 eliminar"  onclick="openDelete(${row.categoria_id})"> <img src="../../resources/svg/eliminar.svg" alt="" />
                                 </div>
                             </div>
                         </div>
@@ -123,13 +130,13 @@ const fillTable = async (form = null) => {
         }
     } else {
         TABLE_BODY.innerHTML += `
-            <tr>
-            <td class="col-1"></td>
-            <td class="col-1"><b>${DATA.error}</b></td>
-            <td class="col-2"></td>
-            <td class="col-1"></td>
-            </tr>
-        `;
+        <tr>
+        <td class="col-2"></td>
+        <td class="col-4"><b>${DATA.error}</b></td>
+        <td class="col-2"></td>
+        <td class="col-2"></td>
+        <td class="col-2"></td>
+        </tr>`;
     }
 }
 
@@ -145,7 +152,7 @@ const openState = async (id) => {
     try {
         if (RESPONSE) {
             const FORM = new FormData();
-            FORM.append('marca_id', id);
+            FORM.append('categoria_id', id);
             console.log(id);
             const DATA = await fetchData(CATEGORIA_API, 'changeStatus', FORM);
             console.log(DATA.status);
@@ -167,11 +174,7 @@ const openState = async (id) => {
 *   Parámetros: ninguno.
 *   Retorno: ninguno.
 */
-const openCreate = () => {
-    SAVE_MODAL.show();
-    MODAL_TITLE.textContent = 'Crear Marca';
-    SAVE_FORM.reset();
-}
+
 
 /*
 *   Función asíncrona para preparar el formulario al momento de actualizar un registro.
@@ -180,7 +183,7 @@ const openCreate = () => {
 */
 const openUpdate = async (id) => {
     const FORM = new FormData();
-    FORM.append('marca_id', id);
+    FORM.append('categoria_id', id);
     const DATA = await fetchData(CATEGORIA_API, 'readOne', FORM);
     if (DATA.status) {
         SAVE_MODAL.show();
@@ -188,12 +191,13 @@ const openUpdate = async (id) => {
         MODAL_TITLE.textContent = 'Actualizar marca';
         SAVE_FORM.reset();
         const ROW = DATA.dataset;
-        MARCA_ID.value = ROW.marca_id;
-        MARCA_NOMBRE.value = ROW.marca_nombre;
+        CATEGORIA_ID.value = ROW.categoria_id;
+        CATEGORIA_NOMBRE.value = ROW.categoria_nombre;
+        CATEGORIA_DESCRIPCION.value = ROW.categoria_descripcion;
 
-        if (ROW.marca_estado == 1) {
+        if (ROW.categoria_estado == 1) {
             RADIO_ESTADO_ACTIVO.checked = true;
-        } else if (ROW.marca_estado === 0) {
+        } else if (ROW.categoria_estado === 0) {
             RADIO_ESTADO_INACTIVO.checked = true;
         }
     } else {
@@ -212,7 +216,7 @@ const openDelete = async (id) => {
     try {
         if (RESPONSE) {
             const FORM = new FormData();
-            FORM.append('marca_id', id);
+            FORM.append('categoria_id', id);
             const DATA = await fetchData(CATEGORIA_API, 'deleteRow', FORM);
             if (DATA.status) {
                 await sweetAlert(1, DATA.message, true);

@@ -2,6 +2,12 @@
 
 require_once('../../models/data/categoria_data.php');
 
+const POST_BUSQUEDA = 'search';
+const POST_NOMBRE = 'categoria_nombre';
+const POST_DESCRIPCION = 'categoria_descripcion';
+const POST_ESTADO = 'categoria_estado';
+const POST_ID = 'categoria_id';
+
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
     // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
@@ -11,11 +17,14 @@ if (isset($_GET['action'])) {
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('status' => 0, 'message' => null, 'dataset' => null, 'error' => null, 'exception' => null, 'fileStatus' => null);
     // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
-    if (isset($_SESSION['idAdministrador'])) {
+    if (isset($_SESSION['admin_id'])) {
+
+        
+
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
             case 'searchRows':
-                if (!Validator::validateSearch($_POST['search'])) {
+                if (!Validator::validateSearch($_POST[POST_BUSQUEDA])) {
                     $result['error'] = Validator::getSearchError();
                 } elseif ($result['dataset'] = $categoria->searchRows()) {
                     $result['status'] = 1;
@@ -27,16 +36,14 @@ if (isset($_GET['action'])) {
             case 'createRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$categoria->setNombre($_POST['nombreCategoria']) or
-                    !$categoria->setDescripcion($_POST['descripcionCategoria']) or
-                    !$categoria->setEstado($_POST['estadoCategoria'])
+                    !$categoria->setNombre($_POST[POST_NOMBRE]) or
+                    !$categoria->setDescripcion($_POST[POST_DESCRIPCION]) or
+                    !$categoria->setEstado($_POST[POST_ESTADO])
                 ) {
                     $result['error'] = $categoria->getDataError();
                 } elseif ($categoria->createRow()) {
                     $result['status'] = 1;
                     $result['message'] = 'Categoría creada correctamente';
-                    // Se asigna el estado del archivo después de insertar.
-                    $result['fileStatus'] = Validator::saveFile($_FILES['imagenCategoria'], $categoria::RUTA_IMAGEN);
                 } else {
                     $result['error'] = 'Ocurrió un problema al crear la categoría';
                 }
@@ -50,7 +57,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'readOne':
-                if (!$categoria->setId($_POST['idCategoria'])) {
+                if (!$categoria->setId($_POST[POST_ID])) {
                     $result['error'] = $categoria->getDataError();
                 } elseif ($result['dataset'] = $categoria->readOne()) {
                     $result['status'] = 1;
@@ -61,10 +68,10 @@ if (isset($_GET['action'])) {
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$categoria->setId($_POST['idCategoria']) or
-                    !$categoria->setNombre($_POST['nombreCategoria']) or
-                    !$categoria->setDescripcion($_POST['descripcionCategoria']) or
-                    !$categoria->setEstado($_POST['estadoCategoria'])
+                    !$categoria->setId($_POST[POST_ID]) or
+                    !$categoria->setNombre($_POST[POST_NOMBRE]) or
+                    !$categoria->setDescripcion($_POST[POST_DESCRIPCION]) or
+                    !$categoria->setEstado($_POST[POST_ESTADO])
                 ) {
                     $result['error'] = $categoria->getDataError();
                 } elseif ($categoria->updateRow()) {
@@ -76,7 +83,7 @@ if (isset($_GET['action'])) {
                 break;
             case 'deleteRow':
                 if (
-                    !$categoria->setId($_POST['idCategoria'])
+                    !$categoria->setId($_POST[POST_ID])
                 ) {
                     $result['error'] = $categoria->getDataError();
                 } elseif ($categoria->deleteRow()) {
@@ -86,6 +93,18 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al eliminar la categoría';
                 }
                 break;
+                case 'changeStatus':
+                    if (
+                        !$categoria->setId($_POST[POST_ID])
+                    ) {
+                        $result['error'] = $categoria->getDataError();
+                    } elseif ($categoria->changeStatus()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Categoría cambiada correctamente';
+                    } else {
+                        $result['error'] = 'Ocurrió un problema al cambiar la categoría';
+                    }
+                    break;
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }

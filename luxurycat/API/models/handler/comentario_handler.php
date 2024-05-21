@@ -13,7 +13,7 @@ class ComentarioHandler
     {
         $value = '%' . Validator::getSearchValue() . '%';
         $sql = "SELECT c.comentario_id AS id_comentario,
-                CONCAT(u.usuario_nombre, ' ', u.usuario_apellido) AS cliente, p.producto_nombre AS producto, c.comentario_fecha AS fecha_del_comentario, c.comentario_texto AS comentario
+                CONCAT(u.usuario_nombre, ' ', u.usuario_apellido) AS cliente, p.producto_nombre AS producto, c.comentario_fecha AS fecha_del_comentario, c.comentario_texto AS comentario, c.comentario_estado
                 FROM tb_comentarios c
                 INNER JOIN tb_detalles_pedidos dp ON c.detalle_pedido_id = dp.detalle_pedido_id
                 INNER JOIN tb_productos p ON dp.producto_id = p.producto_id
@@ -32,7 +32,7 @@ class ComentarioHandler
     public function readAll()
     {
         $sql = "SELECT c.comentario_id AS id_comentario,
-                CONCAT(u.usuario_nombre, ' ', u.usuario_apellido) AS cliente, p.producto_nombre AS producto, c.comentario_fecha AS fecha_del_comentario, c.comentario_texto AS comentario
+                CONCAT(u.usuario_nombre, ' ', u.usuario_apellido) AS cliente, p.producto_nombre AS producto, c.comentario_fecha AS fecha_del_comentario, c.comentario_texto AS comentario, c.comentario_estado
                 FROM tb_comentarios c
                 INNER JOIN tb_detalles_pedidos dp ON c.detalle_pedido_id = dp.detalle_pedido_id
                 INNER JOIN tb_productos p ON dp.producto_id = p.producto_id
@@ -44,7 +44,7 @@ class ComentarioHandler
     public function readOne()
     {
         $sql = "SELECT c.comentario_id AS id_comentario,
-                CONCAT(u.usuario_nombre, ' ', u.usuario_apellido) AS cliente, p.producto_nombre AS producto, c.comentario_fecha AS fecha_del_comentario, c.comentario_texto AS comentario
+                CONCAT(u.usuario_nombre, ' ', u.usuario_apellido) AS cliente, p.producto_nombre AS producto, c.comentario_fecha AS fecha_del_comentario, c.comentario_texto AS comentario, c.comentario_estado
                 FROM tb_comentarios c
                 INNER JOIN tb_detalles_pedidos dp ON c.detalle_pedido_id = dp.detalle_pedido_id
                 INNER JOIN tb_productos p ON dp.producto_id = p.producto_id

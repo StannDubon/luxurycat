@@ -140,6 +140,18 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al cambiar la contraseña';
                 }
                 break;
+                case 'changeStatus':
+                    if (
+                        !$cliente->setId($_POST['usuario_id'])
+                    ) {
+                        $result['error'] = $cliente->getDataError();
+                    } elseif ($cliente->changeStatus()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Categoría cambiada correctamente';
+                    } else {
+                        $result['error'] = 'Ocurrió un problema al cambiar la categoría';
+                    }
+                    break;
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }

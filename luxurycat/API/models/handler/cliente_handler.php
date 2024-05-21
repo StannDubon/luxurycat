@@ -73,11 +73,10 @@ class UsuarioHandler {
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = 'SELECT usuario_id, usuario_nombre, usuario_apellido, usuario_correo, usuario_usuario, usuario_estado
+        $sql = "SELECT usuario_id, usuario_nombre, usuario_apellido, usuario_correo, usuario_usuario, usuario_estado
                 FROM tb_usuarios
-                WHERE usuario_apellido LIKE ? OR usuario_nombre LIKE ?
-                ORDER BY usuario_apellido';
-        $params = array($value, $value);
+                WHERE usuario_apellido LIKE ? OR usuario_nombre LIKE ? OR usuario_correo LIKE ? OR usuario_usuario LIKE ?";
+        $params = array($value, $value, $value, $value);
         return Database::getRows($sql, $params);
     }
 
@@ -92,8 +91,7 @@ class UsuarioHandler {
     public function readAll()
     {
         $sql = 'SELECT usuario_id, usuario_nombre, usuario_apellido, usuario_correo, usuario_usuario, usuario_estado
-                FROM tb_usuarios
-                ORDER BY usuario_apellido';
+                FROM tb_usuarios';
         return Database::getRows($sql);
     }
 
@@ -119,6 +117,13 @@ class UsuarioHandler {
     {
         $sql = 'DELETE FROM tb_usuarios
                 WHERE usuario_id = ?';
+        $params = array($this->usuario_id);
+        return Database::executeRow($sql, $params);
+    }
+
+    public function changeStatus()
+    {
+        $sql = 'UPDATE tb_usuarios SET usuario_estado = NOT usuario_estado WHERE usuario_id=?';
         $params = array($this->usuario_id);
         return Database::executeRow($sql, $params);
     }
