@@ -2,6 +2,17 @@
 // Se incluye la clase del modelo.
 require_once('../../models/data/producto_data.php');
 
+const POST_BUSQUEDA = 'search';
+const POST_NOMBRE = 'producto_nombre';
+const POST_DESCRIPCION = 'producto_descripcion';
+const POST_PRECIO = 'producto_precio';
+const POST_CATEGORIA = 'categoria_id';
+const POST_CANTIDAD = 'producto_cantidad';
+const POST_MARCA = 'marca_id';
+const POST_ESTADO = 'producto_estado';
+const POST_IMAGEN = 'producto_imagen';
+const POST_ID = 'producto_id';
+
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
     // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
@@ -15,7 +26,7 @@ if (isset($_GET['action'])) {
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
             case 'searchRows':
-                if (!Validator::validateSearch($_POST['search'])) {
+                if (!Validator::validateSearch($_POST[POST_BUSQUEDA])) {
                     $result['error'] = Validator::getSearchError();
                 } elseif ($result['dataset'] = $producto->searchRows()) {
                     $result['status'] = 1;
@@ -27,13 +38,14 @@ if (isset($_GET['action'])) {
             case 'createRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$producto->setNombre($_POST['nombreProducto']) or
-                    !$producto->setDescripcion($_POST['descripcionProducto']) or
-                    !$producto->setPrecio($_POST['precioProducto']) or
-                    !$producto->setCategoriaId($_POST['categoriaProducto']) or
-                    !$producto->setMarcaId($_POST['marcaProducto']) or
-                    !$producto->setEstado(isset($_POST['estadoProducto']) ? 1 : 0) or
-                    !$producto->setImagen($_FILES['imagenProducto'])
+                    !$producto->setNombre($_POST[POST_NOMBRE]) or
+                    !$producto->setDescripcion($_POST[POST_DESCRIPCION]) or
+                    !$producto->setPrecio($_POST[POST_PRECIO]) or
+                    !$producto->setCategoriaId($_POST[POST_CATEGORIA]) or
+                    !$producto->setMarcaId($_POST[POST_MARCA]) or
+                    !$producto->setEstado(isset($_POST[POST_ESTADO]) ? 1 : 0) or
+                    !$producto->setImagen($_FILES[POST_IMAGEN]) or
+                    !$producto->setCantidad($_POST[POST_CANTIDAD])
                 ) {
                     $result['error'] = $producto->getDataError();
                 } elseif ($producto->createRow()) {
@@ -54,7 +66,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'readOne':
-                if (!$producto->setId($_POST['idProducto'])) {
+                if (!$producto->setId($_POST[POST_ID])) {
                     $result['error'] = $producto->getDataError();
                 } elseif ($result['dataset'] = $producto->readOne()) {
                     $result['status'] = 1;
@@ -65,14 +77,14 @@ if (isset($_GET['action'])) {
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$producto->setId($_POST['idProducto']) or
+                    !$producto->setId($_POST[POST_ID]) or
                     !$producto->setFilename() or
-                    !$producto->setNombre($_POST['nombreProducto']) or
-                    !$producto->setDescripcion($_POST['descripcionProducto']) or
-                    !$producto->setPrecio($_POST['precioProducto']) or
+                    !$producto->setNombre($_POST[POST_NOMBRE]) or
+                    !$producto->setDescripcion($_POST[POST_DESCRIPCION]) or
+                    !$producto->setPrecio($_POST[POST_PRECIO]) or
                     //!$producto->setCategoria($_POST['categoriaProducto']) or
-                    !$producto->setEstado(isset($_POST['estadoProducto']) ? 1 : 0) or
-                    !$producto->setImagen($_FILES['imagenProducto'], $producto->getFilename())
+                    !$producto->setEstado(isset($_POST[POST_ESTADO]) ? 1 : 0) or
+                    !$producto->setImagen($_FILES[POST_IMAGEN], $producto->getFilename())
                 ) {
                     $result['error'] = $producto->getDataError();
                 } elseif ($producto->updateRow()) {
@@ -86,7 +98,7 @@ if (isset($_GET['action'])) {
                 break;
             case 'deleteRow':
                 if (
-                    !$producto->setId($_POST['idProducto']) or
+                    !$producto->setId($_POST[POST_ID]) or
                     !$producto->setFilename()
                 ) {
                     $result['error'] = $producto->getDataError();
