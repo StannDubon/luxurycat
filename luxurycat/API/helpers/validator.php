@@ -107,6 +107,31 @@ class Validator
         }
     }
 
+    public static function validateImageFileSimple($file)
+    {
+        if (is_uploaded_file($file['tmp_name'])) {
+            // Se obtienen los datos de la imagen.
+            $image = getimagesize($file['tmp_name']);
+            // Se comprueba si el archivo tiene un tamaño mayor a 2MB.
+            if ($file['size'] > 2097152) {
+                self::$file_error = 'El tamaño de la imagen debe ser menor a 2MB';
+                return false;
+            } elseif ($image['mime'] == 'image/jpeg' || $image['mime'] == 'image/png') {
+                // Se obtiene la extensión del archivo (.jpg o .png) y se convierte a minúsculas.
+                $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+                // Se establece un nombre único para el archivo.
+                self::$filename = uniqid() . '.' . $extension;
+                return true;
+            } else {
+                self::$file_error = 'El tipo de imagen debe ser jpg o png';
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+
     /*
     *   Método para validar un correo electrónico.
     *   Parámetros: $value (dato a validar).

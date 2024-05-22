@@ -98,9 +98,9 @@ class ProductoData extends ProductoHandler
     }
 
     // Métodos para validar y establecer la imagen
-    public function setImagen($file, $dimension = 1000)
+    public function setImagen($file)
     {
-        if (!Validator::validateImageFile($file, $dimension)) {
+        if (!Validator::validateImageFileSimple($file)) {
             $this->data_error = Validator::getFileError();
             return false;
         } else {
