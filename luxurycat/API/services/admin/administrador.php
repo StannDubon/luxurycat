@@ -31,8 +31,6 @@ if (isset($_GET['action'])) {
                     !$administrador->setEstado($_POST['admin_estado'])
                 ) {
                     $result['error'] = $administrador->getDataError();
-                } elseif ($_POST['admin_contraseña'] != $_POST['confirmar_contraseña']) {
-                    $result['error'] = 'Contraseñas diferentes';
                 } elseif ($administrador->createRow()) {
                     $result['status'] = 1;
                     $result['message'] = 'Administrador creado correctamente';
