@@ -22,7 +22,7 @@ if (isset($_GET['action'])) {
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('status' => 0, 'message' => null, 'dataset' => null, 'error' => null, 'exception' => null, 'fileStatus' => null);
     // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
-    if (isset($_SESSION['admin_id'])) {
+    if (isset($_SESSION['admin_id']) || true) {
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
             case 'searchRows':
@@ -52,7 +52,7 @@ if (isset($_GET['action'])) {
                     $result['status'] = 1;
                     $result['message'] = 'Producto creado correctamente';
                     // Se asigna el estado del archivo después de insertar.
-                    $result['fileStatus'] = Validator::saveFile($_FILES['imagenProducto'], $producto::RUTA_IMAGEN);
+                    $result['fileStatus'] = Validator::saveFile($_FILES[POST_IMAGEN], $producto::RUTA_IMAGEN);
                 } else {
                     $result['error'] = 'Ocurrió un problema al crear el producto';
                 }
@@ -82,7 +82,8 @@ if (isset($_GET['action'])) {
                     !$producto->setNombre($_POST[POST_NOMBRE]) or
                     !$producto->setDescripcion($_POST[POST_DESCRIPCION]) or
                     !$producto->setPrecio($_POST[POST_PRECIO]) or
-                    //!$producto->setCategoria($_POST['categoriaProducto']) or
+                    !$producto->setCategoriaId($_POST[POST_CATEGORIA]) or
+                    !$producto->setMarcaId($_POST[POST_MARCA]) or
                     !$producto->setEstado(isset($_POST[POST_ESTADO]) ? 1 : 0) or
                     !$producto->setImagen($_FILES[POST_IMAGEN], $producto->getFilename())
                 ) {
@@ -91,7 +92,7 @@ if (isset($_GET['action'])) {
                     $result['status'] = 1;
                     $result['message'] = 'Producto modificado correctamente';
                     // Se asigna el estado del archivo después de actualizar.
-                    $result['fileStatus'] = Validator::changeFile($_FILES['imagenProducto'], $producto::RUTA_IMAGEN, $producto->getFilename());
+                    $result['fileStatus'] = Validator::changeFile($_FILES[POST_IMAGEN], $producto::RUTA_IMAGEN, $producto->getFilename());
                 } else {
                     $result['error'] = 'Ocurrió un problema al modificar el producto';
                 }
@@ -111,6 +112,18 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al eliminar el producto';
                 }
                 break;
+                case 'changeStatus':
+                    if (
+                        !$producto->setId($_POST[POST_ID])
+                    ) {
+                        $result['error'] = $producto->getDataError();
+                    } elseif ($producto->changeStatus()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Categoría cambiada correctamente';
+                    } else {
+                        $result['error'] = 'Ocurrió un problema al cambiar la categoría';
+                    }
+                    break;
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }

@@ -98,13 +98,19 @@ class ProductoData extends ProductoHandler
     }
 
     // Métodos para validar y establecer la imagen
-    public function setImagen($file, $dimension = 1000)
+    public function setImagen($file, $filename = null)
     {
-        if (!Validator::validateImageFile($file, $dimension)) {
+        if (Validator::validateImageFileSimple($file)) {
+            $this->imagen = Validator::getFileName();
+            return true;
+        } elseif (Validator::getFileError()) {
             $this->data_error = Validator::getFileError();
             return false;
+        } elseif ($filename) {
+            $this->imagen = $filename;
+            return true;
         } else {
-            $this->imagen = Validator::getFilename();
+            $this->imagen = 'default.png';
             return true;
         }
     }
@@ -136,7 +142,7 @@ class ProductoData extends ProductoHandler
     public function setFilename()
     {
         if ($data = $this->readFilename()) {
-            $this->filename = $data['imagen_producto'];
+            $this->filename = $data['producto_imagen'];
             return true;
         } else {
             $this->data_error = 'Producto inexistente';
