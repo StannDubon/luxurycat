@@ -43,19 +43,8 @@ class MarcaData extends MarcaHandler
         }
     }
 
-
-    public function setEstado($value)
-    {
-        if (Validator::validateBoolean($value)) {
-            $this->marca_estado = $value;
-            return true;
-        } else {
-            $this->data_error = 'Estado incorrecto';
-            return false;
-        }
-    }
     // Método para establecer el estado de la marca.
-   /* public function setEstado($value)
+    public function setEstado($value)
     {
         // Si $value es un booleano, lo transformamos en un número entero (0 o 1).
         if (is_bool($value)) {
@@ -72,7 +61,7 @@ class MarcaData extends MarcaHandler
             $this->data_error = 'El estado debe ser un valor booleano o un número (0 o 1)';
             return false;
         }
-    }*/
+    }
 
     // Método para obtener el mensaje de error generado durante la validación de los datos.
     public function getDataError()

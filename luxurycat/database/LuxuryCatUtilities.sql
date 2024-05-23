@@ -1,6 +1,7 @@
 -- Función para devolver todos los pedidos hechos por un usuario
 DELIMITER //
 
+
 CREATE FUNCTION totalPedidosUsuario(usuario_id_param INT)
 RETURNS INT
 BEGIN

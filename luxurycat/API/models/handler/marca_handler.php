@@ -1,72 +1,68 @@
 
 <?php
-// Se incluye la clase para trabajar con la base de datos.
 require_once('../../helpers/database.php');
-/*
- *  Clase para manejar el comportamiento de los datos de la tabla administrador.
- */
+
 class MarcaHandler
 {
-    /*
-     *  Declaración de atributos para el manejo de datos.
-     */
     protected $marca_id = null;
     protected $marca_nombre = null;
     protected $marca_estado = null;
 
-    /*
-     *  Métodos para realizar las operaciones SCRUD (search, create, read, update, and delete).
-     */
+    /* BUSQUEDA */
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = 'SELECT * FROM tb_marca where marca_nombre LIKE ?';
+        $sql = 'SELECT * FROM tb_marcas where marca_nombre LIKE ?;';
         $params = array($value);
         return Database::getRows($sql, $params);
     }
 
+    /* INSERTAR */
     public function createRow()
     {
-        $sql = 'Insert into tb_marca(marca_nombre) Values(?);';
+        $sql = 'INSERT INTO tb_marcas(marca_nombre, marca_estado) VALUES(?, ?)';
 
-        $params = array($this->marca_nombre);
+        $params = array($this->marca_nombre, $this->marca_estado);
         return Database::executeRow($sql, $params);
     }
 
+    /* LEER TABLA */
     public function readAll()
     {
-        $sql = 'SELECT * FROM tb_marca';
+        $sql = 'SELECT * FROM tb_marcas;';
         return Database::getRows($sql);
     }
 
+    /* LEER ELEMENTO */
     public function readOne()
     {
-        $sql = 'SELECT * FROM tb_marca WHERE marca_id= ?';
+        $sql = 'SELECT * FROM tb_marcas WHERE marca_id= ?';
         $params = array($this->marca_id);
         return Database::getRow($sql, $params);
     }
 
+    /* ACTUALIZAR */
     public function updateRow()
     {
-        $sql = 'UPDATE tb_marca
-                SET marca_nombre = ?
+        $sql = 'UPDATE tb_marcas
+                SET marca_nombre = ?, marca_estado = ?
                 WHERE marca_id = ?';
-        $params = array($this->marca_nombre, $this->marca_id);
+        $params = array($this->marca_nombre, $this->marca_estado, $this->marca_id);
         return Database::executeRow($sql, $params);
     }
 
+    /* ELIMINAR */
     public function deleteRow()
     {
-        $sql = 'DELETE FROM tb_marca
-                WHERE marca_id = ?';
-        $params = array($this->marca_id);
+        $sql = 'UPDATE tb_productos SET marca_id = NULL WHERE marca_id = ?;
+                DELETE FROM tb_marcas WHERE marca_id = ?;';
+        $params = array($this->marca_id, $this->marca_id);
         return Database::executeRow($sql, $params);
     }
 
-    //Función para cambiar el estado de una marca.
-    public function changeState()
+    public function changeStatus()
     {
-        $sql = 'CALL cambiar_estado_marca(?);';
+        $sql = 'UPDATE tb_marcas SET marca_estado = NOT marca_estado WHERE marca_id=?';
         $params = array($this->marca_id);
         return Database::executeRow($sql, $params);
     }

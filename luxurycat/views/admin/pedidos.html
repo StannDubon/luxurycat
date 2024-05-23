@@ -18,10 +18,14 @@
     <main>
         <div class="row m-5">
             <div class="col-md-3 col-sm-12 louis-george-bold fs-3">Pedidos</div>
-            <div class="col-md-5 col-sm-12">
-                <input class="form-control me-2 mb-2" type="search" placeholder="Buscar" aria-label="Buscar" />
-            </div>
+            <form id="searchForm" class="col-md-5 col-sm-12">
+                <input class="form-control me-2 mb-2" type="search" placeholder="Buscar" name="search" aria-label="Buscar" id="search" />
+              
+            </form>
+
+            </form>
             <div class="col-md-2 col-sm-12"></div>
+
         </div>
 
         <div class="table-responsive-md">
@@ -33,66 +37,13 @@
                         <th class="col-md-2">Total</th>
                         <th class="col-md-2">Dirreción</th>
                         <th class="col-md-1">Estado</th>
-                        <th class="col-md-1">Opciones</th>
                     </tr>
                 </thead>
+                <tbody id="tableBody">
 
-                <body>
-                    <tr>
-                        <td class="col-1">1</td>
-                        <td class="col-1">Nombre</td>
-                        <td class="col-1">$00.00</td>
-                        <td class="col-1">Sonsonate, las flores casa 5b</td>
-                        <td class="col-2">
-                            <img src="../../resources/svg/circulo.svg" alt="" />
-                        </td>
-                        <td class="col-1">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-3 eliminar">
-                                        <img src="../../resources/svg/eliminar.svg" alt="" />
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-1">2</td>
-                        <td class="col-1">Nombre</td>
-                        <td class="col-1">$00.00</td>
-                        <td class="col-1">Sonsonate, las flores casa 5b</td>
-                        <td class="col-2">
-                            <img src="../../resources/svg/circulo.svg" alt="" />
-                        </td>
-                        <td class="col-1">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-3 eliminar">
-                                        <img src="../../resources/svg/eliminar.svg" alt="" />
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-1">3</td>
-                        <td class="col-1">Nombre</td>
-                        <td class="col-1">$00.00</td>
-                        <td class="col-1">Sonsonate, las flores casa 5b</td>
-                        <td class="col-2">
-                            <img src="../../resources/svg/circulo.svg" alt="" />
-                        </td>
-                        <td class="col-1">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-3 eliminar">
-                                        <img src="../../resources/svg/eliminar.svg" alt="" />
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                </body>
+                <tbody id="tableBody">
+                    
+                </tbody>
             </table>
         </div>
     </main>
@@ -110,9 +61,10 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <!-- Controladores -->
+    <!-- Controladores -->
+    <script src="../../controllers/utils/components.js"></script>
     <script src="../../controllers/utils/admin.js"></script>
-    <script src="../../resources/js/alertas.js"></script>
-    <script src="../../resources/js/private-sidebar.js"></script>
+    <script src="../../controllers/admin/pedido.js"></script>
 </body>
 
 </html>
