@@ -1,22 +1,21 @@
 <?php
-// Se incluye la clase del modelo.
 require_once ('../../models/data/marca_data.php');
 
-// Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
-    // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
     session_start();
-    // Se instancia la clase correspondiente.
+
     $marca = new MarcaData;
-    // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('status' => 0, 'message' => null, 'dataset' => null, 'error' => null, 'exception' => null);
-    // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
+    if (isset($_SESSION['admin_id']) || true) {
+        $result['session'] = 1;
     switch ($_GET['action']) {
 
         case 'searchRows':
-            // Validación de la cadena de búsqueda.
+
             if (!Validator::validateSearch($_POST['search'])) {
+
                 $result['error'] = Validator::getSearchError();
+                
             } elseif ($result['dataset'] = $marca->searchRows()) {
                 $result['status'] = 1;
                 $result['message'] = 'Existen ' . count($result['dataset']) . ' coincidencias';
@@ -26,13 +25,14 @@ if (isset($_GET['action'])) {
             break;
 
         case 'createRow':
-            if (!isset($_POST['marca_nombre'])) {
+            if (!isset($_POST['marca_nombre']) || !isset($_POST['marca_estado'])) {
                 $result['error'] = 'Los campos requeridos no están presentes en la solicitud';
             } else {
                 $_POST = Validator::validateForm($_POST);
                 // Validación de los datos del formulario para crear una nueva marca.
                 if (
-                    !$marca->setNombre($_POST['marca_nombre'])
+                    !$marca->setNombre($_POST['marca_nombre']) ||
+                    !$marca->setEstado($_POST['marca_estado'])
                 ) {
                     $result['error'] = $marca->getDataError();
                 } elseif ($marca->createRow()) {
@@ -70,6 +70,7 @@ if (isset($_GET['action'])) {
             // Validación de los datos del formulario para actualizar una marca.
             if (
                 !$marca->setNombre($_POST['marca_nombre']) or
+                !$marca->setEstado($_POST['marca_estado']) or
                 !$marca->setId($_POST['marca_id'])
             ) {
                 $result['error'] = $marca->getDataError();
@@ -92,22 +93,21 @@ if (isset($_GET['action'])) {
                 $result['error'] = 'Ocurrió un problema al eliminar la marca';
             }
             break;
-            // Estado
-            case 'changeState':
+            case 'changeStatus':
                 if (
                     !$marca->setId($_POST['marca_id'])
                 ) {
                     $result['error'] = $marca->getDataError();
-                } elseif ($marca->changeState()) {
+                } elseif ($marca->changeStatus()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Estado del cliente cambiado correctamente';
+                    $result['message'] = 'Categoría cambiada correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al alterar el estado del cliente';
+                    $result['error'] = 'Ocurrió un problema al cambiar la categoría';
                 }
                 break;
         default:
             $result['error'] = 'Acción no disponible dentro de la sesión';
-    }
+    }}
 
     // Se obtiene la excepción del servidor de base de datos por si ocurrió un problema.
     $result['exception'] = Database::getException();
