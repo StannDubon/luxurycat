@@ -193,7 +193,7 @@ const openUpdate = async (id) => {
 
         if (ROW.marca_estado == 1) {
             RADIO_ESTADO_ACTIVO.checked = true;
-        } else if (ROW.marca_estado === 0) {
+        } else if (ROW.marca_estado == 0) {
             RADIO_ESTADO_INACTIVO.checked = true;
         }
     } else {
