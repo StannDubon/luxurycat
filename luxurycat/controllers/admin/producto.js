@@ -141,11 +141,11 @@ const openCreate = () => {
   fillSelect(MARCA_API, "readAll", "marca_id");
 };
 
-*   Función asíncrona para preparar el formulario al momento de actualizar un registro.
+/*   Función asíncrona para preparar el formulario al momento de actualizar un registro.
 *   Parámetros: id (identificador del registro seleccionado).
 *   Retorno: ninguno.
 */
-const openUpdate = async (id) => {
+const updateRow = async (id) => {
     // Se define un objeto con los datos del registro seleccionado.
     const FORM = new FormData();
     FORM.append('idProducto', id);

@@ -15,24 +15,31 @@ const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
 // Constantes para establecer los elementos del formulario de guardar.
 const SAVE_FORM = document.getElementById('saveForm'),
     CATEGORIA_ID = document.getElementById('categoria_id'),
-    CATEGORIA_NOMBRE = document.getElementById('categoria_nombre');
-    CATEGORIA_DESCRIPCION = document.getElementById('categoria_descripcion');
+    CATEGORIA_NOMBRE = document.getElementById('categoria_nombre'),
+    CATEGORIA_DESCRIPCION = document.getElementById('categoria_descripcion')
 
 const RADIO_ESTADO_ACTIVO = document.getElementById("activo");
 const RADIO_ESTADO_INACTIVO = document.getElementById("inactivo");
 
 
 // Método del evento para cuando el documento ha cargado.
-document.addEventListener('DOMContentLoaded', () => {
-    loadTemplate()
+document.addEventListener("DOMContentLoaded", () => {
+    // Llamada a la función para mostrar el encabezado y pie del documento.
+    loadTemplate();
+    // Llamada a la función para llenar la tabla con los registros existentes.
     fillTable();
-});
+  });
+
+
 
 const openCreate = () => {
+    // Se muestra la caja de diálogo con su título.
     SAVE_MODAL.show();
-    MODAL_TITLE.textContent = 'Crear Marca';
-    SAVE_FORM.reset();
-}
+    MODAL_TITLE.textContent = "Crear marca";
+    // Se prepara el formulario.
+    //SAVE_FORM.reset();
+
+  };
 
 SEARCH_INPUT.addEventListener('input', (event) => {
     // Constante tipo objeto con los datos del formulario.

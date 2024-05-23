@@ -62,12 +62,13 @@ const fillTable = async (form = null) => {
                 }
                 TABLE_BODY.innerHTML += `
                     <tr>
-                    <td class="col-1">${row.id_pedido}</td>
-                    <td class="col-1">${row.nombre_cliente}</td>
-                    <td class="col-1">$${row.precio_total}</td>
-                    <td class="col-1">${row.direccion}</td>
+                    <td class="col-1">${row.pedido_id}</td>
+                    <td class="col-1">${row.pedido_fechaEntrega}</td>
+                    <td class="col-1">$${row.pedido_fechaSolicitud}</td>
+                    <td class="col-1">${row.pedido_direccion}</td>
+                    <td class="col-1">${row.pedido_estado}</td>
                     <td class="col-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: ${color_estado};" onclick="openState(${row.id_pedido})">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: ${color_estado};" onclick="openState(${row.pedido_id})">
                         <path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2z"></path></svg>
                     </td>
                     </tr>
