@@ -14,7 +14,7 @@ admin_apellido VARCHAR(100) NOT NULL,
 admin_usuario VARCHAR(100) NOT NULL,
 admin_contraseña VARCHAR(100) NOT NULL, 
 admin_correo VARCHAR(100) NOT NULL, 
-admin_estado VARCHAR(100) NOT NULL,
+admin_estado BOOLEAN DEFAULT 1,
 tipo_admin_id INT DEFAULT 1
 );
 

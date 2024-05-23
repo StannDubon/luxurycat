@@ -22,7 +22,7 @@ const SAVE_FORM = document.getElementById('saveForm'),
 const RADIO_ESTADO_ACTIVO = document.getElementById("activo");
 const RADIO_ESTADO_INACTIVO = document.getElementById("inactivo");
 
-// Método del evento para cuando el documento ha cargado.
+// Método del evento para cuando el document    o ha cargado.
 document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
     loadTemplate();
@@ -138,7 +138,7 @@ const openUpdate = async (id) => {
     // Se define un objeto con los datos del registro seleccionado.
     const FORM = new FormData();
     FORM.append('idProducto', id);
-    // Petición para obtener los datos del registro solicitado.
+    // Petición para obtener los datos d    el registro solicitado.
     const DATA = await fetchData(PRODUCTO_API, 'readOne', FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
