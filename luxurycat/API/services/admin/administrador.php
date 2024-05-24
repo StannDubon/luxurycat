@@ -28,10 +28,11 @@ if (isset($_GET['action'])) {
                     !$administrador->setCorreo($_POST['admin_correo']) or
                     !$administrador->setUsuario($_POST['admin_usuario']) or
                     !$administrador->setContraseña($_POST['admin_contraseña']) or
-                    !$administrador->setEstado($_POST['admin_estado'])
+                    !$administrador->setEstado($_POST['admin_estado']) or
+                    !$administrador->setTipoAdminId($_POST['tipoadmin_id'])
                 ) {
                     $result['error'] = $administrador->getDataError();
-                } elseif ($administrador->createRow()) {
+                } elseif ($administrador->createRows()) {
                     $result['status'] = 1;
                     $result['message'] = 'Administrador creado correctamente';
                 } else {
@@ -63,7 +64,8 @@ if (isset($_GET['action'])) {
                     !$administrador->setApellido($_POST['admin_apellido']) or
                     !$administrador->setCorreo($_POST['admin_correo']) or
                     !$administrador->setUsuario($_POST['admin_usuario']) or
-                    !$administrador->setEstado($_POST['admin_estado'])
+                    !$administrador->setEstado($_POST['admin_estado']) or
+                    !$administrador->setTipoAdminId($_POST['tipoadmin_id'])
                 ) {
                     $result['error'] = $administrador->getDataError();
                 } elseif ($administrador->updateRow()) {
