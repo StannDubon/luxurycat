@@ -18,8 +18,10 @@ class ProductoHandler
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = 'SELECT producto_id, categoria_id, marca_id, producto_descripcion, producto_nombre, producto_precio, producto_imagen, producto_cantidad, producto_estado
-                FROM tb_productos
+        $sql = 'SELECT p.producto_id, c.categoria_nombre AS categoria, m.marca_nombre AS marca, p.*
+                FROM tb_productos p
+                JOIN tb_categorias c ON p.categoria_id = c.categoria_id
+                JOIN tb_marcas m ON p.marca_id = m.marca_id
                 WHERE producto_nombre LIKE ? OR producto_descripcion LIKE ?
                 ORDER BY producto_nombre';
         $params = array($value, $value);

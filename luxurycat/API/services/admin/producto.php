@@ -43,7 +43,7 @@ if (isset($_GET['action'])) {
                     !$producto->setPrecio($_POST[POST_PRECIO]) or
                     !$producto->setCategoriaId($_POST[POST_CATEGORIA]) or
                     !$producto->setMarcaId($_POST[POST_MARCA]) or
-                    !$producto->setEstado(isset($_POST[POST_ESTADO]) ? 1 : 0) or
+                    !$producto->setEstado($_POST[POST_ESTADO]) or
                     !$producto->setImagen($_FILES[POST_IMAGEN]) or
                     !$producto->setCantidad($_POST[POST_CANTIDAD])
                 ) {
@@ -84,7 +84,7 @@ if (isset($_GET['action'])) {
                     !$producto->setPrecio($_POST[POST_PRECIO]) or
                     !$producto->setCategoriaId($_POST[POST_CATEGORIA]) or
                     !$producto->setMarcaId($_POST[POST_MARCA]) or
-                    !$producto->setEstado(isset($_POST[POST_ESTADO]) ? 1 : 0) or
+                    !$producto->setEstado($_POST[POST_ESTADO]) or
                     !$producto->setImagen($_FILES[POST_IMAGEN], $producto->getFilename())
                 ) {
                     $result['error'] = $producto->getDataError();
