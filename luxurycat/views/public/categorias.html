@@ -28,118 +28,10 @@
             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
         </div>
 
-        <div class="productos_card_container">
-
-            <div class="producto_card info">
-                <img src="https://purina.com.sv/sites/default/files/2022-11/gatitos_pescado_carne_leche_cat_chow.jpg"
-                    alt="">
-
-                <div class="producto_card_informacion">
-                    <p class="producto_card_name">
-                        Purina juasjuas</p>
-
-                    <p class="producto_card_descripcion">
-                        No ps purina semejante down</p>
-
-                    <p class="producto_card_precio">
-                        $9.99</p>
-
-                    <p class="producto_card_action">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            style="fill: #fff;">
-                            <path
-                                d="M21 4H2v2h2.3l3.521 9.683A2.004 2.004 0 0 0 9.7 17H18v-2H9.7l-.728-2H18c.4 0 .762-.238.919-.606l3-7A.998.998 0 0 0 21 4z">
-                            </path>
-                            <circle cx="10.5" cy="19.5" r="1.5"></circle>
-                            <circle cx="16.5" cy="19.5" r="1.5"></circle>
-                        </svg>
-                    </p>
-                </div>
-            </div>
-
-            <div class="producto_card info">
-                <img src="https://purina.com.sv/sites/default/files/2022-11/gatitos_pescado_carne_leche_cat_chow.jpg"
-                    alt="">
-
-                <div class="producto_card_informacion">
-                    <p class="producto_card_name">
-                        Purina juasjuas</p>
-
-                    <p class="producto_card_descripcion">
-                        No ps purina semejante down</p>
-
-                    <p class="producto_card_precio">
-                        $9.99</p>
-
-                    <p class="producto_card_action">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            style="fill: #fff;">
-                            <path
-                                d="M21 4H2v2h2.3l3.521 9.683A2.004 2.004 0 0 0 9.7 17H18v-2H9.7l-.728-2H18c.4 0 .762-.238.919-.606l3-7A.998.998 0 0 0 21 4z">
-                            </path>
-                            <circle cx="10.5" cy="19.5" r="1.5"></circle>
-                            <circle cx="16.5" cy="19.5" r="1.5"></circle>
-                        </svg>
-                    </p>
-                </div>
-            </div>
-
-            <div class="producto_card info">
-                <img src="https://purina.com.sv/sites/default/files/2022-11/gatitos_pescado_carne_leche_cat_chow.jpg"
-                    alt="">
-
-                <div class="producto_card_informacion">
-                    <p class="producto_card_name">
-                        Purina juasjuas</p>
-
-                    <p class="producto_card_descripcion">
-                        No ps purina semejante down</p>
-
-                    <p class="producto_card_precio">
-                        $9.99</p>
-
-                    <p class="producto_card_action">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            style="fill: #fff;">
-                            <path
-                                d="M21 4H2v2h2.3l3.521 9.683A2.004 2.004 0 0 0 9.7 17H18v-2H9.7l-.728-2H18c.4 0 .762-.238.919-.606l3-7A.998.998 0 0 0 21 4z">
-                            </path>
-                            <circle cx="10.5" cy="19.5" r="1.5"></circle>
-                            <circle cx="16.5" cy="19.5" r="1.5"></circle>
-                        </svg>
-                    </p>
-                </div>
-            </div>
-
-            <div class="producto_card info">
-                <img src="https://purina.com.sv/sites/default/files/2022-11/gatitos_pescado_carne_leche_cat_chow.jpg"
-                    alt="">
-
-                <div class="producto_card_informacion">
-                    <p class="producto_card_name">
-                        Purina juasjuas</p>
-
-                    <p class="producto_card_descripcion">
-                        No ps purina semejante down</p>
-
-                    <p class="producto_card_precio">
-                        $9.99</p>
-
-                    <p class="producto_card_action">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            style="fill: #fff;">
-                            <path
-                                d="M21 4H2v2h2.3l3.521 9.683A2.004 2.004 0 0 0 9.7 17H18v-2H9.7l-.728-2H18c.4 0 .762-.238.919-.606l3-7A.998.998 0 0 0 21 4z">
-                            </path>
-                            <circle cx="10.5" cy="19.5" r="1.5"></circle>
-                            <circle cx="16.5" cy="19.5" r="1.5"></circle>
-                        </svg>
-                    </p>
-                </div>
-            </div>
-
+        <div class="productos_card_container" id="productos_card_container">
+            <!--Aquí se cargaran las cartas -->
         </div>
-
+            
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-scrollable">
                 <div class="modal-content">
@@ -208,7 +100,9 @@
     <script src="../../resources//js/public_index.js"></script>
     <script src="../../resources/js/public-sidebar.js"></script>
     <script src="../../controllers/utils/footer.js"></script>
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="../../controllers/utils/components.js"></script>
+    <script src="../../controllers/public/categorias.js"></script>
 </body>
 
 </html>
