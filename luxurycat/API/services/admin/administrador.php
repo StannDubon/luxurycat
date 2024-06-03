@@ -35,6 +35,7 @@ if (isset($_GET['action'])) {
             case 'createRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
+<<<<<<< HEAD
                     !$administrador->setNombre($_POST[POST_NOMBRE]) or
                     !$administrador->setApellido($_POST[POST_APELLIDO]) or
                     !$administrador->setCorreo($_POST[POST_CORREO]) or
@@ -46,6 +47,18 @@ if (isset($_GET['action'])) {
                 } elseif ($_POST[POST_CONTRASEÑA] != $_POST[POST_CONFIRMAR_CONTRASEÑA]) {
                     $result['error'] = 'Contraseñas diferentes';
                 } elseif ($administrador->createRow()) {
+=======
+                    !$administrador->setNombre($_POST['admin_nombre']) or
+                    !$administrador->setApellido($_POST['admin_apellido']) or
+                    !$administrador->setCorreo($_POST['admin_correo']) or
+                    !$administrador->setUsuario($_POST['admin_usuario']) or
+                    !$administrador->setContraseña($_POST['admin_contraseña']) or
+                    !$administrador->setEstado($_POST['admin_estado']) or
+                    !$administrador->setTipoAdminId($_POST['tipoadmin_id'])
+                ) {
+                    $result['error'] = $administrador->getDataError();
+                } elseif ($administrador->createRows()) {
+>>>>>>> 7ebfda988741ce42f101ccd37e8cdc7cba5ec532
                     $result['status'] = 1;
                     $result['message'] = 'Administrador creado correctamente';
                 } else {
@@ -72,12 +85,22 @@ if (isset($_GET['action'])) {
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
+<<<<<<< HEAD
                     !$administrador->setId($_POST[POST_ID]) or
                     !$administrador->setNombre($_POST[POST_NOMBRE]) or
                     !$administrador->setApellido($_POST[POST_APELLIDO]) or
                     !$administrador->setCorreo($_POST[POST_CORREO]) or
                     !$administrador->setUsuario($_POST[POST_USUARIO]) or
                     !$administrador->setEstado($_POST[POST_ESTADO])
+=======
+                    !$administrador->setId($_POST['admin_id']) or
+                    !$administrador->setNombre($_POST['admin_nombre']) or
+                    !$administrador->setApellido($_POST['admin_apellido']) or
+                    !$administrador->setCorreo($_POST['admin_correo']) or
+                    !$administrador->setUsuario($_POST['admin_usuario']) or
+                    !$administrador->setEstado($_POST['admin_estado']) or
+                    !$administrador->setTipoAdminId($_POST['tipoadmin_id'])
+>>>>>>> 7ebfda988741ce42f101ccd37e8cdc7cba5ec532
                 ) {
                     $result['error'] = $administrador->getDataError();
                 } elseif ($administrador->updateRow()) {

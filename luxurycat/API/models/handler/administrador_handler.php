@@ -11,6 +11,8 @@ class AdministradorHandler {
     protected $admin_contraseña = null;
     protected $admin_correo = null;
     protected $admin_estado = null;
+    protected $tipo_admin_id = null;
+
 
     public function checkUser($username, $password)
     {
@@ -73,10 +75,17 @@ class AdministradorHandler {
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = 'SELECT admin_id, admin_nombre, admin_apellido, admin_correo, admin_usuario, admin_estado
+        $sql = 'SELECT admin_id, admin_nombre, admin_apellido, admin_correo, admin_usuario, admin_estado, tipo_admin_nombre
                 FROM tb_administradores
+<<<<<<< HEAD
                 WHERE admin_apellido LIKE ? OR admin_nombre LIKE ? OR admin_correo LIKE ? OR admin_usuario LIKE ? OR admin_estado LIKE ?';
         $params = array($value, $value, $value, $value, $value);
+=======
+                INNER JOIN tb_tipos_admin USING(tipo_admin_id)
+                WHERE admin_apellido LIKE ? OR admin_nombre LIKE ?
+                ORDER BY admin_apellido';
+        $params = array($value, $value);
+>>>>>>> 7ebfda988741ce42f101ccd37e8cdc7cba5ec532
         return Database::getRows($sql, $params);
     }
 
@@ -85,6 +94,14 @@ class AdministradorHandler {
         $sql = 'INSERT INTO tb_administradores(admin_nombre, admin_apellido, admin_correo, admin_usuario, admin_contraseña, admin_estado)
                 VALUES(?, ?, ?, ?, ?, ?)';
         $params = array($this->admin_nombre, $this->admin_apellido, $this->admin_correo, $this->admin_usuario, $this->admin_contraseña, $this->admin_estado);
+        return Database::executeRow($sql, $params);
+    }
+
+    public function createRows()
+    {
+        $sql = 'INSERT INTO tb_administradores(admin_nombre, admin_apellido, admin_correo, admin_usuario, admin_contraseña, admin_estado, tipo_admin_id)
+                VALUES(?, ?, ?, ?, ?, ?, ?)';
+        $params = array($this->admin_nombre, $this->admin_apellido, $this->admin_correo, $this->admin_usuario, $this->admin_contraseña, $this->admin_estado, $this->tipo_admin_id);
         return Database::executeRow($sql, $params);
     }
 
@@ -107,9 +124,9 @@ class AdministradorHandler {
     public function updateRow()
     {
         $sql = 'UPDATE tb_administradores
-                SET admin_nombre = ?, admin_apellido = ?, admin_correo = ?, admin_usuario = ?, admin_estado = ?
+                SET admin_nombre = ?, admin_apellido = ?, admin_correo = ?, admin_usuario = ?, admin_estado = ?, tipo_admin_id = ?
                 WHERE admin_id = ?';
-        $params = array($this->admin_nombre, $this->admin_apellido, $this->admin_correo, $this->admin_usuario, $this->admin_estado, $this->admin_id);
+        $params = array($this->admin_nombre, $this->admin_apellido, $this->admin_correo, $this->admin_usuario, $this->admin_estado, $this->tipo_admin_id, $this->admin_id);
         return Database::executeRow($sql, $params);
     }
 

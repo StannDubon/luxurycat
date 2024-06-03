@@ -101,6 +101,17 @@ class AdministradorData extends AdministradorHandler
         }
     }
 
+    public function setTipoAdminId($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->tipo_admin_id = $value;
+            return true;
+        } else {
+            $this->data_error = 'El identificador del tipo de admin es incorrecto';
+            return false;
+        }
+    }
+
     public function getDataError()
     {
         return $this->data_error;
