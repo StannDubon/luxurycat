@@ -75,9 +75,8 @@ class AdministradorHandler {
         $value = '%' . Validator::getSearchValue() . '%';
         $sql = 'SELECT admin_id, admin_nombre, admin_apellido, admin_correo, admin_usuario, admin_estado
                 FROM tb_administradores
-                WHERE admin_apellido LIKE ? OR admin_nombre LIKE ?
-                ORDER BY admin_apellido';
-        $params = array($value, $value);
+                WHERE admin_apellido LIKE ? OR admin_nombre LIKE ? OR admin_correo LIKE ? OR admin_usuario LIKE ? OR admin_estado LIKE ?';
+        $params = array($value, $value, $value, $value, $value);
         return Database::getRows($sql, $params);
     }
 
@@ -92,8 +91,7 @@ class AdministradorHandler {
     public function readAll()
     {
         $sql = 'SELECT admin_id, admin_nombre, admin_apellido, admin_correo, admin_usuario, admin_estado
-                FROM tb_administradores
-                ORDER BY admin_apellido';
+                FROM tb_administradores';
         return Database::getRows($sql);
     }
 
@@ -115,10 +113,26 @@ class AdministradorHandler {
         return Database::executeRow($sql, $params);
     }
 
+    public function updateRowPassword()
+    {
+        $sql = 'UPDATE tb_administradores
+                SET admin_nombre = ?, admin_apellido = ?, admin_correo = ?, admin_usuario = ?, admin_estado = ?, admin_contraseña = ?
+                WHERE admin_id = ?';
+        $params = array($this->admin_nombre, $this->admin_apellido, $this->admin_correo, $this->admin_usuario, $this->admin_estado, $this->admin_contraseña, $this->admin_id);
+        return Database::executeRow($sql, $params);
+    }
+
     public function deleteRow()
     {
         $sql = 'DELETE FROM tb_administradores
                 WHERE admin_id = ?';
+        $params = array($this->admin_id);
+        return Database::executeRow($sql, $params);
+    }
+
+    public function changeStatus()
+    {
+        $sql = 'UPDATE tb_administradores SET admin_estado = NOT admin_estado WHERE admin_id=?';
         $params = array($this->admin_id);
         return Database::executeRow($sql, $params);
     }
