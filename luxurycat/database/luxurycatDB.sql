@@ -34,7 +34,7 @@ usuario_id INT NOT NULL,
 pedido_fechaEntrega DATE DEFAULT NOW() NOT NULL,
 pedido_fechaSolicitud DATE DEFAULT NOW() NOT NULL,
 pedido_direccion VARCHAR(200) NOT NULL,
-pedido_estado BOOLEAN DEFAULT 1
+pedido_estado ENUM('Pendiente', 'Entregado', 'Finalizado', 'Anulado') NULL DEFAULT 'Pendiente'
 );
 
 CREATE TABLE tb_categorias(

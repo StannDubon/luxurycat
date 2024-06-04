@@ -69,5 +69,18 @@ class ComentarioHandler
     }
 
 
+    public function readOneProduct()
+    {
+        $sql = "SELECT c.comentario_id AS id_comentario,
+                CONCAT(u.usuario_nombre, ' ', u.usuario_apellido) AS cliente, p.producto_nombre AS producto, c.comentario_fecha AS fecha_del_comentario, c.comentario_texto AS comentario, c.comentario_estado
+                FROM tb_comentarios c
+                INNER JOIN tb_detalles_pedidos dp ON c.detalle_pedido_id = dp.detalle_pedido_id
+                INNER JOIN tb_productos p ON dp.producto_id = p.producto_id
+                INNER JOIN tb_pedidos ped ON dp.pedido_id = ped.pedido_id
+                INNER JOIN tb_usuarios u ON ped.usuario_id = u.usuario_id
+                WHERE p.producto_id = ?;";
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
 }
 ?>
