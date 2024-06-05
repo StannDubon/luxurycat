@@ -97,7 +97,7 @@ class AdministradorHandler {
 
     public function readOne()
     {
-        $sql = 'SELECT admin_id, admin_nombre, admin_apellido, admin_correo, admin_usuario, admin_estado
+        $sql = 'SELECT admin_id, admin_nombre, admin_apellido, admin_correo, admin_usuario, admin_estado, tipo_admin_id
                 FROM tb_administradores
                 WHERE admin_id = ?';
         $params = array($this->admin_id);

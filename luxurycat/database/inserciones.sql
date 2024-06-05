@@ -1,4 +1,6 @@
 -- Inserciones en tb_usuarios
+USE luxury_cat_db
+
 INSERT INTO tb_usuarios (usuario_nombre, usuario_apellido, usuario_usuario, usuario_contraseña, usuario_correo, usuario_estado)
 VALUES 
 ('Jose', 'Molina', 'jmolina', 'password1', 'jose.molina@example.com', 1),

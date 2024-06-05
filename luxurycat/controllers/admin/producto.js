@@ -141,6 +141,8 @@ const openCreate = () => {
   fillSelect(MARCA_API, "readAll", "marca_id");
 };
 
+
+
 /*
 *   Función asíncrona para cambiar el estado de un registro.
 *   Parámetros: id (identificador del registro seleccionado).
