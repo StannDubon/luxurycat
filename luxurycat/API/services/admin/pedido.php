@@ -30,7 +30,7 @@ if (isset($_GET['action'])) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
                 } else {
-                    $result['error'] = 'No existen categorías registradas';
+                    $result['error'] = 'No existen pedidos registrados';
                 }
                 break;
             case 'readOne':
@@ -39,7 +39,7 @@ if (isset($_GET['action'])) {
                 } elseif ($result['dataset'] = $pedido->readOne()) {
                     $result['status'] = 1;
                 } else {
-                    $result['error'] = 'Categoría inexistente';
+                    $result['error'] = 'Pedido inexistente';
                 }
                 break;
             case 'deleteRow':
@@ -49,9 +49,9 @@ if (isset($_GET['action'])) {
                     $result['error'] = $pedido->getDataError();
                 } elseif ($pedido->deleteRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Categoría eliminada correctamente';
+                    $result['message'] = 'Pedido eliminada correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al eliminar la categoría';
+                    $result['error'] = 'Ocurrió un problema al eliminar el pedido';
                 }
                 break;
             case 'changeStatus':
@@ -61,9 +61,9 @@ if (isset($_GET['action'])) {
                     $result['error'] = $pedido->getDataError();
                 } elseif ($pedido->changeStatus()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Categoría cambiada correctamente';
+                    $result['message'] = 'Pedido cambiado correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al cambiar la categoría';
+                    $result['error'] = 'Ocurrió un problema al cambiar el pedido';
                 }
                 break;
             default:

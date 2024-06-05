@@ -35,9 +35,9 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Contraseñas diferentes';
                 } elseif ($cliente->createRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Administrador creado correctamente';
+                    $result['message'] = 'Cliente creado correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al crear el administrador';
+                    $result['error'] = 'Ocurrió un problema al crear el cliente';
                 }
                 break;
             case 'readAll':
@@ -45,16 +45,16 @@ if (isset($_GET['action'])) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
                 } else {
-                    $result['error'] = 'No existen administradores registrados';
+                    $result['error'] = 'No existen clientes registrados';
                 }
                 break;
             case 'readOne':
                 if (!$cliente->setId($_POST['usuario_id'])) {
-                    $result['error'] = 'Administrador incorrecto';
+                    $result['error'] = 'Cliente incorrecto';
                 } elseif ($result['dataset'] = $cliente->readOne()) {
                     $result['status'] = 1;
                 } else {
-                    $result['error'] = 'Administrador inexistente';
+                    $result['error'] = 'Cliente inexistente';
                 }
                 break;
             case 'updateRow':
@@ -70,9 +70,9 @@ if (isset($_GET['action'])) {
                     $result['error'] = $cliente->getDataError();
                 } elseif ($cliente->updateRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Administrador modificado correctamente';
+                    $result['message'] = 'Cliente modificado correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al modificar el administrador';
+                    $result['error'] = 'Ocurrió un problema al modificar el cliente';
                 }
                 break;
             case 'deleteRow':
@@ -80,9 +80,9 @@ if (isset($_GET['action'])) {
                     $result['error'] = $cliente->getDataError();
                 } elseif ($cliente->deleteRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Administrador eliminado correctamente';
+                    $result['message'] = 'Cliente eliminado correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al eliminar el administrador';
+                    $result['error'] = 'Ocurrió un problema al eliminar el cliente';
                 }
                 break;
             case 'getUser':
@@ -90,7 +90,7 @@ if (isset($_GET['action'])) {
                     $result['status'] = 1;
                     $result['username'] = $_SESSION['usuario_usuario'];
                 } else {
-                    $result['error'] = 'Usuario de administrador indefinido';
+                    $result['error'] = 'Usuario de cliente indefinido';
                 }
                 break;
             case 'logOut':

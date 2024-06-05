@@ -100,9 +100,9 @@ if (isset($_GET['action'])) {
                     $result['error'] = $marca->getDataError();
                 } elseif ($marca->changeStatus()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Categoría cambiada correctamente';
+                    $result['message'] = 'Marca cambiada correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al cambiar la categoría';
+                    $result['error'] = 'Ocurrió un problema al cambiar la marca';
                 }
                 break;
         default:
