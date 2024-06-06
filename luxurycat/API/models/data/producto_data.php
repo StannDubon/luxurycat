@@ -85,6 +85,18 @@ class ProductoData extends ProductoHandler
         }
     }
 
+    // Métodos para validar y establecer el nombre
+    public function setNombreCategoria($value, $min = 2, $max = 50)
+    {
+        if (!Validator::validateLength($value, $min, $max)) {
+            $this->data_error = 'El nombre debe tener una longitud entre ' . $min . ' y ' . $max;
+            return false;
+        } else {
+            $this->nombre_categoria = $value;
+            return true;
+        }
+    }
+
     // Métodos para validar y establecer el precio
     public function setPrecio($value)
     {

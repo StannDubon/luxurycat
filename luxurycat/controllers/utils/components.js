@@ -3,7 +3,7 @@
 *   CONTROLADOR DE USO GENERAL EN TODAS LAS PÁGINAS WEB.
 */
 // Constante para establecer la ruta base del servidor.
-const SERVER_URL = 'http://localhost/LuxuryCat/luxurycat/API/';
+const SERVER_URL = 'http://localhost/LuxuryCat/LuxuryCat/luxurycat/API/';
 
 /*
 *   Función para mostrar un mensaje de confirmación. 
@@ -31,6 +31,11 @@ const confirmAction = (message) => {
             }
         }
     });
+}
+
+/* FUNCION PA REGRESAR XD */
+const goBack = () => {
+    window.history.back();
 }
 
 /*

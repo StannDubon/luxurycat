@@ -1,5 +1,5 @@
 // Constante para completar la ruta de la API.
-const CATEGORIA_API = 'services/admin/categoria.php';
+const ADMINISTRADOR_API = 'services/admin/administrador.php';
 
 // Constante para establecer el formulario de buscar.
 const SEARCH_FORM = document.getElementById('searchForm');
@@ -14,9 +14,13 @@ const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
 
 // Constantes para establecer los elementos del formulario de guardar.
 const SAVE_FORM = document.getElementById('saveForm'),
-    CATEGORIA_ID = document.getElementById('categoria_id'),
-    CATEGORIA_NOMBRE = document.getElementById('categoria_nombre');
-    CATEGORIA_DESCRIPCION = document.getElementById('categoria_descripcion');
+    ADMIN_ID = document.getElementById('admin_id'),
+    ADMIN_NOMBRE = document.getElementById('admin_nombre');
+    ADMIN_APELLIDO = document.getElementById('admin_apellido');
+    ADMIN_CORREO = document.getElementById('admin_correo');
+    ADMIN_USUARIO = document.getElementById('admin_usuario');
+    ADMIN_CONTRASEÑA = document.getElementById('admin_contraseña');
+    ADMIN_CONFIRMAR_CONTRASEÑA = document.getElementById('confirmar_contraseña');
 
 const RADIO_ESTADO_ACTIVO = document.getElementById("activo");
 const RADIO_ESTADO_INACTIVO = document.getElementById("inactivo");
@@ -24,7 +28,7 @@ const RADIO_ESTADO_INACTIVO = document.getElementById("inactivo");
 
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', () => {
-    loadTemplate();
+    loadTemplate()
     fillTable();
 });
 
@@ -45,27 +49,27 @@ SEARCH_INPUT.addEventListener('input', (event) => {
 
 // Método del evento para cuando se envía el formulario de guardar.
 SAVE_FORM.addEventListener('submit', async (event) => {
-    // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
-    // Se verifica la acción a realizar.
-    (CATEGORIA_ID.value) ? action = 'updateRow' : action = 'createRow';
-    // Constante tipo objeto con los datos del formulario.
+
+    let action = (ADMIN_ID.value) ? 'updateRow' : 'createRow';
+
+    if (ADMIN_CONTRASEÑA.value !== "" || ADMIN_CONFIRMAR_CONTRASEÑA.value !== "") {
+        action = 'updateRowPassword';
+    }
+
     const FORM = new FormData(SAVE_FORM);
-    // Petición para guardar los datos del formulario.
-    const DATA = await fetchData(CATEGORIA_API, action, FORM);
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    const DATA = await fetchData(ADMINISTRADOR_API, action, FORM);
+
     if (DATA.status) {
-        // Se cierra la caja de diálogo.
         SAVE_MODAL.hide();
-        CATEGORIA_ID.value=null
-        // Se muestra un mensaje de éxito.
+        ADMIN_ID.value = null;
         sweetAlert(1, DATA.message, true);
-        // Se carga nuevamente la tabla para visualizar los cambios.
         fillTable();
     } else {
         sweetAlert(2, DATA.error, false);
     }
 });
+
 
 
 
@@ -82,61 +86,50 @@ const fillTable = async (form = null) => {
     const searchValue = form.get('search');
     const action = searchValue ? 'searchRows' : 'readAll';
 
-    const DATA = await fetchData(CATEGORIA_API, action, form);
+    const DATA = await fetchData(ADMINISTRADOR_API, action, form);
     if (DATA.status) {
         if (action === 'searchRows' && DATA.dataset.length === 0) {
-            TABLE_BODY.innerHTML += `
-                <tr>
-                <td class="col-2"></td>
-                <td class="col-4"><b>${DATA.error}</b></td>
-                <td class="col-2"></td>
-                <td class="col-2"></td>
-                <td class="col-2"></td>
-                </tr>
-            `;
+            VoidResult(DATA.error)
         } else {
             DATA.dataset.forEach(row => {
                 let color_estado;
     
-                if (row.categoria_estado == 1) {
+                if (row.admin_estado == 1) {
                     color_estado = "#71D17A";
                 } else {
                     color_estado = "#F87777";
                 }
                 TABLE_BODY.innerHTML += `
                     <tr>
-                    <td class="col-2">${row.categoria_id}</td>
-                    <td class="col-4">${row.categoria_nombre}</td>
-                    <td class="col-2">${row.categoria_descripcion}</td>
-                    <td class="col-2">
+                        <td class="col-1">${row.admin_id}</td>
+                        <td class="col-1">${row.admin_nombre}</td>
+                        <td class="col-1">${row.admin_apellido}</td>
+                        <td class="col-1">${row.admin_usuario}</td>
+                        <td class="col-1">${row.admin_correo}</td>
+                        <td class="col-2">
 
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: ${color_estado};" onclick="openState(${row.categoria_id})">
-                    <path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2z"></path></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: ${color_estado};" onclick="openState(${row.admin_id})">
+                            <path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2z"></path></svg>
 
-                    </td>
-                    <td class="col-2">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-3 editar"  onclick="openUpdate(${row.categoria_id})"> <img src="../../resources/svg/editar.svg" alt="" />
-                                </div>
-                                <div class="col-3 eliminar"  onclick="openDelete(${row.categoria_id})"> <img src="../../resources/svg/eliminar.svg" alt="" />
+                        </td>
+                        <td class="col-1">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-3 editar" onclick="openUpdate(${row.admin_id})">
+                                        <img src="../../resources/svg/editar.svg" alt="" />
+                                    </div>
+                                    <div class="col-3 eliminar" onclick="openDelete(${row.admin_id})">
+                                        <img src="../../resources/svg/eliminar.svg" alt="" />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </td>
+                        </td>
                     </tr>
                 `;
             });
         }
     } else {
-        TABLE_BODY.innerHTML += `
-        <tr>
-        <td class="col-2"></td>
-        <td class="col-4"><b>${DATA.error}</b></td>
-        <td class="col-2"></td>
-        <td class="col-2"></td>
-        <td class="col-2"></td>
-        </tr>`;
+        VoidResult(DATA.error)
     }
 }
 
@@ -152,9 +145,9 @@ const openState = async (id) => {
     try {
         if (RESPONSE) {
             const FORM = new FormData();
-            FORM.append('categoria_id', id);
+            FORM.append('admin_id', id);
             console.log(id);
-            const DATA = await fetchData(CATEGORIA_API, 'changeStatus', FORM);
+            const DATA = await fetchData(ADMINISTRADOR_API, 'changeStatus', FORM);
             console.log(DATA.status);
             if (DATA.status) {
                 await sweetAlert(1, DATA.message, true);
@@ -183,21 +176,23 @@ const openState = async (id) => {
 */
 const openUpdate = async (id) => {
     const FORM = new FormData();
-    FORM.append('categoria_id', id);
-    const DATA = await fetchData(CATEGORIA_API, 'readOne', FORM);
+    FORM.append('admin_id', id);
+    const DATA = await fetchData(ADMINISTRADOR_API, 'readOne', FORM);
     if (DATA.status) {
         SAVE_MODAL.show();
 
         MODAL_TITLE.textContent = 'Actualizar marca';
         SAVE_FORM.reset();
         const ROW = DATA.dataset;
-        CATEGORIA_ID.value = ROW.categoria_id;
-        CATEGORIA_NOMBRE.value = ROW.categoria_nombre;
-        CATEGORIA_DESCRIPCION.value = ROW.categoria_descripcion;
+        ADMIN_ID.value = ROW.admin_id;
+        ADMIN_NOMBRE.value = ROW.admin_nombre;
+        ADMIN_APELLIDO.value = ROW.admin_apellido;
+        ADMIN_CORREO.value = ROW.admin_correo;
+        ADMIN_USUARIO.value = ROW.admin_usuario;
 
-        if (ROW.categoria_estado == 1) {
+        if (ROW.admin_estado == 1) {
             RADIO_ESTADO_ACTIVO.checked = true;
-        } else if (ROW.categoria_estado == 0) {
+        } else if (ROW.admin_estado == 0) {
             RADIO_ESTADO_INACTIVO.checked = true;
         }
     } else {
@@ -216,8 +211,8 @@ const openDelete = async (id) => {
     try {
         if (RESPONSE) {
             const FORM = new FormData();
-            FORM.append('categoria_id', id);
-            const DATA = await fetchData(CATEGORIA_API, 'deleteRow', FORM);
+            FORM.append('admin_id', id);
+            const DATA = await fetchData(ADMINISTRADOR_API, 'deleteRow', FORM);
             if (DATA.status) {
                 await sweetAlert(1, DATA.message, true);
                 fillTable();
@@ -231,3 +226,18 @@ const openDelete = async (id) => {
     }
 
 }
+
+const VoidResult = async (error) => {
+    TABLE_BODY.innerHTML += `
+      <tr>
+      <td class="col-1"></td>
+      <td class="col-2">${error}</td>
+      <td class="col-1"></td>
+      <td class="col-2"></td>
+      <td class="col-1"></td>
+      <td class="col-1"></td>
+      <td class="col-1"></td>
+      </tr>
+      `;
+  };
+  

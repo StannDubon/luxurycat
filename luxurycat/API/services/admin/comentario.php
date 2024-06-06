@@ -30,7 +30,7 @@ if (isset($_GET['action'])) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
                 } else {
-                    $result['error'] = 'No existen categorías registradas';
+                    $result['error'] = 'No existen comentarios registrados';
                 }
                 break;
             case 'readOne':
@@ -39,7 +39,7 @@ if (isset($_GET['action'])) {
                 } elseif ($result['dataset'] = $comentario->readOne()) {
                     $result['status'] = 1;
                 } else {
-                    $result['error'] = 'Categoría inexistente';
+                    $result['error'] = 'Comentario inexistente';
                 }
                 break;
             case 'deleteRow':
@@ -49,9 +49,9 @@ if (isset($_GET['action'])) {
                     $result['error'] = $comentario->getDataError();
                 } elseif ($comentario->deleteRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Categoría eliminada correctamente';
+                    $result['message'] = 'Comentario eliminado correctamente';
                     } else {
-                    $result['error'] = 'Ocurrió un problema al eliminar la categoría';
+                    $result['error'] = 'Ocurrió un problema al eliminar el comentario';
                 }
                 break;
             case 'changeStatus':
@@ -61,9 +61,9 @@ if (isset($_GET['action'])) {
                     $result['error'] = $comentario->getDataError();
                 } elseif ($comentario->changeStatus()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Categoría cambiada correctamente';
+                    $result['message'] = 'Comentario cambiada correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al cambiar la categoría';
+                    $result['error'] = 'Ocurrió un problema al cambiar el comentario';
                 }
                 break;
             default:

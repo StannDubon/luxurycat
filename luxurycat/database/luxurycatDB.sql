@@ -14,7 +14,7 @@ admin_apellido VARCHAR(100) NOT NULL,
 admin_usuario VARCHAR(100) NOT NULL,
 admin_contraseña VARCHAR(100) NOT NULL, 
 admin_correo VARCHAR(100) NOT NULL, 
-admin_estado VARCHAR(100) NOT NULL,
+admin_estado  boolean NOT NULL DEFAULT 1,
 tipo_admin_id INT DEFAULT 1
 );
 
@@ -31,10 +31,10 @@ usuario_estado boolean NOT NULL DEFAULT 1
 CREATE TABLE tb_pedidos(
 pedido_id INT PRIMARY KEY AUTO_INCREMENT, 
 usuario_id INT NOT NULL,
-pedido_fechaEntrega DATE DEFAULT NOW() NOT NULL,
-pedido_fechaSolicitud DATE DEFAULT NOW() NOT NULL,
+pedido_fechaEntrega DATE DEFAULT NOW(),
+pedido_fechaSolicitud DATE DEFAULT NOW(),
 pedido_direccion VARCHAR(200) NOT NULL,
-pedido_estado BOOLEAN DEFAULT 1
+pedido_estado ENUM('Pendiente', 'Entregado', 'Finalizado', 'Anulado') NULL DEFAULT 'Pendiente'
 );
 
 CREATE TABLE tb_categorias(
@@ -57,7 +57,7 @@ marca_id INT,
 producto_descripcion VARCHAR(200) NOT NULL,
 producto_nombre VARCHAR(100) NOT NULL,
 producto_precio NUMERIC(5, 2) CHECK (producto_precio >= 0),
-producto_imagen VARCHAR(100),
+producto_imagen VARCHAR(100) DEFAULT 'default.png',
 producto_cantidad INT NOT NULL CHECK (producto_cantidad >= 0),
 producto_estado BOOLEAN DEFAULT 1
 );
@@ -126,4 +126,16 @@ ADD CONSTRAINT fk_comentarios_usuarios
 FOREIGN KEY (usuario_id) REFERENCES tb_usuarios(usuario_id);
 
 INSERT INTO tb_tipos_admin(tipo_admin_nombre)
-VALUES('low'), ('mid'), ('high'), ('root');
+VALUES('root');
+
+/* UTILITIES */
+
+DELIMITER //
+
+CREATE PROCEDURE eliminarCategoria(IN p_categoria_id INT)
+BEGIN
+    UPDATE tb_productos SET categoria_id = 1 WHERE categoria_id = p_categoria_id;
+    DELETE FROM tb_categorias WHERE categoria_id = p_categoria_id;
+END //
+
+DELIMITER ;		

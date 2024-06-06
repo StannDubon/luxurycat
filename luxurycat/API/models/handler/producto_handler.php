@@ -13,13 +13,17 @@ class ProductoHandler
     protected $cantidad = null;
     protected $estado = null;
 
+    protected $nombre_categoria = null;
+
     const RUTA_IMAGEN = '../../images/productos/';
 
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = 'SELECT producto_id, categoria_id, marca_id, producto_descripcion, producto_nombre, producto_precio, producto_imagen, producto_cantidad, producto_estado
-                FROM tb_productos
+        $sql = 'SELECT p.producto_id, c.categoria_nombre AS categoria, m.marca_nombre AS marca, p.*
+                FROM tb_productos p
+                JOIN tb_categorias c ON p.categoria_id = c.categoria_id
+                JOIN tb_marcas m ON p.marca_id = m.marca_id
                 WHERE producto_nombre LIKE ? OR producto_descripcion LIKE ?
                 ORDER BY producto_nombre';
         $params = array($value, $value);
@@ -62,6 +66,18 @@ class ProductoHandler
                 WHERE producto_id = ?';
         $params = array($this->categoria_id, $this->marca_id, $this->descripcion, $this->nombre, $this->precio, $this->imagen, $this->cantidad, $this->estado, $this->id);
         return Database::executeRow($sql, $params);
+    }
+
+    public function readCategoria()
+    {
+        $sql = 'SELECT p.producto_id, c.categoria_nombre AS categoria, m.marca_nombre AS marca, p.*
+                FROM tb_productos p
+                JOIN tb_categorias c ON p.categoria_id = c.categoria_id
+                JOIN tb_marcas m ON p.marca_id = m.marca_id
+                WHERE c.categoria_nombre = ?;
+                ';
+        $params = array($this->nombre_categoria);
+        return Database::getRows($sql, $params);
     }
 
     public function deleteRow()

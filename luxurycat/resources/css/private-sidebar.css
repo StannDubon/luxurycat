@@ -311,3 +311,13 @@ main.min-main {
     margin-left: 0;
   }
 }
+
+.logout_button{
+  background-color: rgb(39, 39, 39);
+  width: 100%;
+  height: 50px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
