@@ -23,60 +23,61 @@
     <main>
 
         <div class="container">
-            <h2 class="m-5">Carrito</h2>
+            <h2 class="m-5" id="mainTitle"></h2>
         </div>
 
         <div class="container">
             <div class="row mt-5">
                 <!-- Lateral izquierdo - Cartas de productos -->
                 <div class="col-md-8">
-
-                    <div class="card mb-3">
-                        <div class="row g-0">
-                            <img src="https://purina.com.sv/sites/default/files/2022-11/gatitos_pescado_carne_leche_cat_chow.jpg"
-                                class="rounded-start col-md-4 card_image_fixer">
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-9">
-                                            <h5 class="card-title">Nombre del Producto</h5>
-                                            <p class="card-text">Descripción del producto</p>
-                                            <p class="card-text mb-3"><small class="text-muted">Precio: $XX.XX</small>
-                                            </p>
-                                        </div>
-                                        <div class="col-md-3 d-flex flex-column">
-                                            <button class="btn btn-danger">Eliminar</button>
-                                            <div class="input-group input-group-sm mt-3 mb-3">
-                                                <button class="btn btn-outline-secondary" type="button">-</button>
-                                                <input type="text" class="form-control text-center" value="1">
-                                                <button class="btn btn-outline-secondary" type="button">+</button>
-                                            </div>
-                                            <p class="m-0">$XX.XX</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                    
+                        <div class="productos_card_container" id="carrito">
+                            <!--Aquí se cargarán las cartas del carrito -->
                         </div>
-                    </div>
-
-
                 </div>
                 <!-- Lateral derecho - Sumatorio y finalizar compra -->
                 <div class="col-lg-4">
                     <h3 class="mb-3">Sumatorio</h3>
                     <div class="mb-3">
                         <label for="direccion" class="form-label">Dirección de Envío</label>
-                        <textarea class="form-control" id="direccion" rows="3"></textarea>
+                        <textarea class="form-control" id="direccion" name="direccion" rows="3"></textarea>
                     </div>
-                    <p>Total Final: $XX.XX</p>
-                    <button class="btn btn-primary">Finalizar Compra</button>
+                    <p>Total Final: $<span id="pago"></span></p>
+                    <button class="btn btn-primary" onclick="finishOrder()">Finalizar Compra</button>
                 </div>
             </div>
         </div>
+<!-- Componente Modal para mostrar una caja de diálogo -->
+<div class="modal fade" id="itemModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+aria-labelledby="modalTitle" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+    <!-- Contenido del componente Modal -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="modalTitle">Cambiar cantidad</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <!-- Formulario para actualizar cantidad -->
+        <form id="itemForm">
+            <div class="modal-body row">
+                <input type="number" class="d-none" id="idDetalle" name="idDetalle">
+                <div class="col-sm-12">
+                    <label for="cantidadProducto" class="form-label">Cantidad</label>
+                    <input id="cantidadProducto" type="number" name="cantidadProducto" min="1" class="form-control"
+                        required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
 
+
+<footer></footer>
     </main>
-
-    <footer></footer>
 
 
 
@@ -99,6 +100,8 @@
     <script src="../../resources//js/public_index.js"></script>
     <script src="../../controllers/utils/footer.js"></script>
     <script src="../../resources/js/public-sidebar.js"></script>
+    <script src="../../controllers/utils/components.js"></script>
+    <script src="../../controllers/public/carrito.js"></script>
 
 </body>
 

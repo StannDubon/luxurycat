@@ -1,6 +1,7 @@
 // Constantes para completar las rutas de la API.
 const CATEGORIA_API = "services/public/categoria.php";
 const VALORACIONES_API = "services/public/comentario.php";
+const PEDIDOS_API = "services/public/pedido.php";
 
 // Constantes para establecer los elementos del componente Modal.
 const SAVE_MODAL = new bootstrap.Modal("#exampleModal"),
@@ -88,7 +89,7 @@ async function cargarComentarios(id, producto, imagen) {
     // Mostrar cartas de productos obtenidos de la API
     DATA.dataset.forEach((product) => {
       const cardHtml = `
-                    <div class="col-lg-4 col-md-4 col-sm-12 text-center">
+                    <div class="text-center pb-5">
                         <div class="card carta">
                             <div class="card-body">
                                 <h5 class="card-title">Usuario: ${product.cliente}</h5>
@@ -103,3 +104,36 @@ async function cargarComentarios(id, producto, imagen) {
     console.log("Error al obtener datos");
   }
 }
+
+/*
+ *   Función asíncrona para guardar el carrito desde .
+ *   Parámetros: id (identificador del registro seleccionado).
+ *   Retorno: ninguno.
+ */
+const saveCart = async (id) => {
+  // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
+  const RESPONSE = await confirmAction(
+    "¿Desea guardar el producto en el carrito?"
+  );
+  // Se verifica la respuesta del mensaje.
+  if (RESPONSE) {
+    // Se define una constante tipo objeto con los datos del registro seleccionado.
+    const FORM = new FormData();
+    FORM.append("idProducto", id);
+    FORM.append("cantidadProducto", 1);
+    // Petición para eliminar el registro seleccionado.
+    const DATA = await fetchData(PEDIDOS_API, "createDetail", FORM);
+    console.log(DATA.status);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    if (DATA.status) {
+      // Se muestra un mensaje de éxito.
+      await sweetAlert(1, DATA.message, false, "carrito.html");
+    } else if (DATA.session) {
+      sweetAlert(2, DATA.error, false);
+    } else {
+      sweetAlert(3, DATA.error, true, "Loginpublica.html");
+    }
+  } else {
+    console.error("ocurrio un error");
+  }
+};

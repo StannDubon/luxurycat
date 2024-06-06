@@ -12,17 +12,18 @@ class UsuarioHandler {
     protected $usuario_correo = null;
     protected $usuario_estado = null;
 
-    public function checkUser($username, $password)
+    public function checkUser($user, $password)
     {
-        $sql = 'SELECT usuario_id, usuario_usuario, usuario_contraseña
+        $sql = 'SELECT usuario_id, usuario_usuario, usuario_contraseña, usuario_correo, usuario_estado
                 FROM tb_usuarios
                 WHERE usuario_usuario = ?';
-        $params = array($username);
-        if (!($data = Database::getRow($sql, $params))) {
-            return false;
-        } elseif (password_verify($password, $data['usuario_contraseña'])) {
-            $_SESSION['usuario_id'] = $data['usuario_id'];
-            $_SESSION['usuario_usuario'] = $data['usuario_usuario'];
+        $params = array($user);
+        $data = Database::getRow($sql, $params);
+        if (password_verify($password, $data['usuario_contraseña'])) {
+            $this->usuario_id = $data['usuario_id'];
+            $this->usuario_correo = $data['usuario_correo'];
+            $this->usuario_estado = $data['usuario_estado'];
+            $this->usuario_usuario = $data['usuario_usuario'];
             return true;
         } else {
             return false;
@@ -37,6 +38,17 @@ class UsuarioHandler {
         $params = array($_SESSION['usuario_id']);
         $data = Database::getRow($sql, $params);
         if (password_verify($password, $data['usuario_contraseña'])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function checkStatus()
+    {
+        if ($this->usuario_estado) {
+            $_SESSION['usuario_id'] = $this->usuario_id;
+            $_SESSION['usuario_usuario'] = $this->usuario_usuario;
             return true;
         } else {
             return false;
